@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- EDIT: PAGE TITLE -->
+  <title>Services — CRE8 PR</title>
+
+  <!-- EDIT: META DESCRIPTION -->
+  <meta name="description" content="Engineering design, CAD, prototyping, and small-batch manufacturing services by CRE8 PR." />
+
+  <style>
+    :root{
+      --bg:#070707;
+      --panel:rgba(0,0,0,0.45);
+      --panelStrong:rgba(0,0,0,0.60);
+      --text:rgba(255,255,255,0.92);
+      --muted:rgba(255,255,255,0.65);
+      --border:rgba(255,255,255,0.14);
+      --grid:rgba(255,255,255,0.05);
+      --shadow:0 14px 40px rgba(0,0,0,0.70);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--text);
+      background:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        var(--bg);
+      background-size:42px 42px;
+    }
+
+    .wrap{max-width:1100px;margin:auto;padding:24px}
+    a{color:inherit;text-decoration:none}
+
+    .nav{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:14px 18px;
+      border:1px solid var(--border);
+      background:var(--panelStrong);
+      border-radius:999px;
+      box-shadow:var(--shadow);
+    }
+
+    .btn{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.08);
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:600;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      padding:26px;
+      box-shadow:var(--shadow);
+      margin-top:24px;
+    }
+
+    h1{font-size:44px;margin:0 0 12px}
+    h3{margin:16px 0 6px}
+    .lead{color:var(--muted);line-height:1.6}
+
+    footer{
+      margin:32px 0 12px;
+      text-align:center;
+      font-size:12px;
+      color:var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header class="nav">
+  <a href="index.html"><b>CRE8 PR</b></a>
+  <a class="btn" href="index.html">Home</a>
+</header>
+
+<main>
+
+<section class="card">
+  <h1>Services</h1>
+
+  <!-- EDIT: SERVICES DESCRIPTION -->
+  <p class="lead">
+    CRE8 PR provides end-to-end engineering design and prototyping services.
+    Engagements can start from either a defined solution idea or an open-ended
+    problem statement.
+  </p>
+
+  <h3>Concept Development</h3>
+  <p class="lead">
+    We translate your idea or problem into a clear engineering concept, identifying
+    constraints, use cases, and success criteria.
+  </p>
+
+  <h3>CAD & Engineering Design</h3>
+  <p class="lead">
+    Parametric 3D models and assemblies designed with real-world manufacturing,
+    tolerances, and materials in mind.
+  </p>
+
+  <h3>Prototyping</h3>
+  <p class="lead">
+    Rapid prototyping via 3D printing or simple fabrication to validate form, fit,
+    and function.
+  </p>
+
+  <h3>Iteration & Refinement</h3>
+  <p class="lead">
+    Designs are refined based on physical testing and user feedback until the
+    solution meets performance and usability goals.
+  </p>
+
+  <h3>Small-Batch Manufacturing</h3>
+  <p class="lead">
+    Once validated, we assist with short production runs or transition the design
+    to a manufacturing partner.
+  </p>
+</section>
+
+<footer>
+  © <span id="year"></span> CRE8 PR · Puerto Rico
+</footer>
+
+</main>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
