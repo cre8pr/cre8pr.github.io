@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Start a Project — CRE8 PR</title>
+
+  <meta name="description" content="Start a design or prototyping project with CRE8 PR." />
+
+  <style>
+    :root{
+      --bg:#070707;
+      --panel:rgba(0,0,0,0.45);
+      --panelStrong:rgba(0,0,0,0.60);
+      --text:rgba(255,255,255,0.92);
+      --muted:rgba(255,255,255,0.65);
+      --border:rgba(255,255,255,0.14);
+      --grid:rgba(255,255,255,0.05);
+      --shadow:0 14px 40px rgba(0,0,0,0.70);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--text);
+      background:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        var(--bg);
+      background-size:42px 42px;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:900px;margin:auto;padding:24px}
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      padding:14px 18px;
+      border:1px solid var(--border);
+      background:var(--panelStrong);
+      border-radius:999px;
+      box-shadow:var(--shadow);
+      position:sticky;
+      top:16px;
+      z-index:10;
+      backdrop-filter:blur(10px);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .brand b{font-size:16px}
+    .brand span{font-size:12px;color:var(--muted)}
+
+    .btn{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.08);
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:14px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    main{margin-top:32px}
+
+    .card{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:var(--shadow);
+      margin-bottom:24px;
+    }
+
+    h1{margin:0 0 12px;font-size:40px}
+    h3{margin:18px 0 8px}
+    .lead{color:var(--muted);line-height:1.6}
+
+    form{display:grid;gap:14px;margin-top:12px}
+    label{font-size:12px;color:var(--muted)}
+    input,textarea{
+      width:100%;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(0,0,0,0.4);
+      color:var(--text);
+    }
+    textarea{min-height:140px;resize:vertical}
+
+    footer{
+      margin:40px 0 12px;
+      text-align:center;
+      font-size:12px;
+      color:var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header class="nav">
+  <a class="brand" href="index.html">
+    <svg width="28" height="28" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="10" width="100" height="100" rx="22" fill="#fff"/>
+      <path d="M30 60
+               C30 40,50 40,60 60
+               C70 80,90 80,90 60
+               C90 40,70 40,60 60
+               C50 80,30 80,30 60Z"
+            fill="none"
+            stroke="#070707"
+            stroke-width="6"/>
+    </svg>
+    <div>
+      <b>CRE8 PR</b>
+      <span>Design · Prototype · Build</span>
+    </div>
+  </a>
+
+  <div style="display:flex;gap:8px">
+    <a class="btn" href="index.html">Home</a>
+    <a class="btn" href="services.html">Services</a>
+    <a class="btn" href="about.html">About</a>
+  </div>
+</header>
+
+<main>
+
+<section class="card">
+  <h1>Start a project</h1>
+  <p class="lead">
+    Tell us what you’re trying to build, improve, or figure out.
+    You don’t need a finished idea — just a problem worth solving.
+  </p>
+</section>
+
+<section class="card">
+  <h3>Project details</h3>
+
+  <form id="projectForm">
+    <div>
+      <label>Name</label>
+      <input id="name" required placeholder="Your name" />
+    </div>
+
+    <div>
+      <label>Email</label>
+      <input id="email" type="email" required placeholder="you@email.com" />
+    </div>
+
+    <div>
+      <label>What are you trying to build or solve?</label>
+      <textarea id="problem" required placeholder="Describe the problem, idea, or product..."></textarea>
+    </div>
+
+    <div>
+      <label>Constraints or requirements (optional)</label>
+      <textarea id="constraints" placeholder="Dimensions, materials, budget, timeline, etc."></textarea>
+    </div>
+
+    <button class="btn" type="submit">Generate email</button>
+
+    <p class="lead" style="font-size:13px">
+      This opens your email app — no account or backend required.
+    </p>
+  </form>
+</section>
+
+<footer>
+  © <span id="year"></span> CRE8 PR · Puerto Rico
+</footer>
+
+</main>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const CONTACT_TO = "juan.fadhel@nyu.edu";
+
+  document.getElementById("projectForm").addEventListener("submit", e => {
+    e.preventDefault();
+
+    const name = nameInput = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const problem = document.getElementById("problem").value;
+    const constraints = document.getElementById("constraints").value;
+
+    const subject = `New CRE8 PR project — ${name}`;
+    const body =
+`Hi CRE8 PR,
+
+My name is ${name} (${email}).
+
+PROJECT DESCRIPTION
+${problem}
+
+CONSTRAINTS / NOTES
+${constraints || "None specified."}
+
+Thanks,
+${name}`;
+
+    window.location.href =
+      `mailto:${CONTACT_TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>
+
+</body>
+</html>
