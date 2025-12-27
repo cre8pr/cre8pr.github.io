@@ -151,7 +151,7 @@
 <section class="card">
   <h3>Project details</h3>
 
-  <form action="https://formspree.io/f/mykywkvr" method="POST">
+  <form action="https://formspree.io/f/mykywkvr" method="POST" enctype="multipart/form-data">
 
   <input type="hidden" name="_subject" value="New CRE8 PR Project Request">
 
@@ -171,11 +171,24 @@
     </div>
 
     <div>
-      <label>Constraints or requirements (optional)</label>
-      <textarea name="constraints"></textarea>
-    </div>
+  <label>Constraints or requirements (optional)</label>
+  <textarea name="constraints"></textarea>
+</div>
 
-    <button class="btn" type="submit">Generate email</button>
+<div>
+  <label>Upload reference files (optional)</label>
+  <input
+    type="file"
+    name="attachments"
+    multiple
+    accept=".pdf,.png,.jpg,.jpeg,.stl,.step,.iges,.zip"
+  />
+  <small style="color:var(--muted)">
+    Sketches, CAD, STL, or ZIP files (max size depends on upload limits)
+  </small>
+</div>
+
+<button class="btn" type="submit">Generate email</button>
   </form>
 </section>
 
@@ -192,6 +205,7 @@
 
 </body>
 </html>
+
 
 
 
