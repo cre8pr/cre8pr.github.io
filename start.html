@@ -176,16 +176,11 @@
 </div>
 
 <div>
-  <label>Upload reference files (optional)</label>
-  <input
-    type="file"
-    name="attachments"
-    multiple
-    accept=".pdf,.png,.jpg,.jpeg,.stl,.step,.iges,.zip"
-  />
-  <small style="color:var(--muted)">
-    Sketches, CAD, STL, or ZIP files (max size depends on upload limits)
-  </small>
+  <label>Reference files or links (optional)</label>
+  <textarea
+    name="files_link"
+    placeholder="Paste a Google Drive / Dropbox / WeTransfer link, or mention that files are available"
+  ></textarea>
 </div>
 
 <button class="btn" type="submit">Generate email</button>
@@ -205,6 +200,7 @@
 
 </body>
 </html>
+
 
 
 
