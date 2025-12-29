@@ -99,6 +99,34 @@
       position:sticky;top:16px;z-index:10;
       backdrop-filter:blur(10px);
     }
+    /* ===== MOBILE NAV OVERRIDE (matches index.html) ===== */
+.nav-links{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+@media (max-width: 720px){
+  .nav{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+
+    /* THIS is the key line */
+    border-radius:18px;
+  }
+
+  .nav-links{
+    width:100%;
+    flex-wrap:wrap;
+  }
+
+  .nav-links .btn{
+    flex:1 1 auto;
+    text-align:center;
+  }
+}
+
 
     .brand{display:flex;align-items:center;gap:12px}
     .brand b{font-size:16px;letter-spacing:0.4px}
@@ -241,33 +269,42 @@ main{
        ========================================================= -->
   <header class="nav">
   <a class="brand" href="index.html">
-  <svg width="28" height="28" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="10" y="10" width="100" height="100" rx="22" fill="#fff"/>
-    <path d="M30 60
-             C30 40,50 40,60 60
-             C70 80,90 80,90 60
-             C90 40,70 40,60 60
-             C50 80,30 80,30 60Z"
-          fill="none"
-          stroke="#070707"
-          stroke-width="6"
-          stroke-linecap="round"
-          stroke-linejoin="round"/>
-  </svg>
+  <div
+  style="
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    overflow:hidden;
+    flex-shrink:0;
+  "
+>
+  <img
+    src="logo.png"
+    alt="CRE8 PR logo"
+    style="
+      width:100%;
+      height:100%;
+      display:block;
+    "
+  />
+</div>
+
+
   <div>
     <b>CRE8 PR</b>
     <span>Design · Prototype · Build</span>
   </div>
 </a>
-<div style="display:flex;gap:8px;align-items:center">
-  <a class="btn" href="index.html">Home</a>
-    <a class="btn" href="services.html">Services</a>
-    <a class="btn" href="about.html">About</a>
-    <a class="btn" href="start.html">Start a project</a>
-  </div>
-</header>
-  </header>
 
+
+  <nav class="nav-links">
+  <a class="btn" href="index.html">Home</a>
+  <a class="btn" href="services.html">Services</a>
+  <a class="btn" href="about.html">About</a>
+  <a class="btn" href="start.html">Start a project</a>
+</nav>
+
+</header>
   <main id="top">
 
     <!-- =========================================================
@@ -373,6 +410,7 @@ ${name}`;
 </body>
 
 </html>
+
 
 
 
