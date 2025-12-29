@@ -139,7 +139,11 @@ backdrop-filter:blur(10px);
 
 
 .brand{display:flex;align-items:center;gap:12px}
-.brand b{font-size:16px;letter-spacing:0.4px}
+.brand b{
+ font-size:16px;
+ letter-spacing:0.4px;
+ color: var(--text);
+}
 .brand span{display:block;font-size:12px;color:var(--muted)}
 
 /* Buttons */
@@ -155,6 +159,8 @@ transition: background .12s ease, transform .12s ease;
 display:inline-flex;
 align-items:center;
 justify-content:center;
+text-decoration: none;
+color: var(--text);
 }
 .btn:hover{background:rgba(255,255,255,0.14); transform: translateY(-1px);}
 
@@ -484,6 +490,7 @@ Depending on the project: CAD files, prototype(s), drawings, and a clean revisio
 </body>
 
 </html>
+
 
 
 
