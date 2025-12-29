@@ -67,32 +67,12 @@ main{
 
 @media (max-width: 720px){
   .nav{
-display:flex;align-items:center;justify-content:space-between;
-gap:16px;
-padding:14px 18px;
-border:1px solid var(--border);
-background:var(--panelStrong);
-border-radius:999px;
-box-shadow:var(--shadow);
-position:sticky;top:16px;z-index:10;
-backdrop-filter:blur(10px);
-}
-
-/* =========================================================
-   MOBILE NAV FIX (CORRECT LOCATION)
-   ========================================================= */
-.nav-links{
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-
-@media (max-width: 720px){
-  .nav{
     flex-direction:column;
     align-items:flex-start;
     gap:12px;
-    border-radius:18px; /* kills giant pill */
+
+    /* kills the giant pill on mobile */
+    border-radius:18px;
   }
 
   .nav-links{
@@ -107,31 +87,25 @@ backdrop-filter:blur(10px);
 }
 
 
-.brand{display:flex;align-items:center;gap:12px}
-.brand b{
- font-size:16px;
- letter-spacing:0.4px;
- color: var(--text);
+    .brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
-.brand span{display:block;font-size:12px;color:var(--muted)}
 
-/* Buttons */
-.btn{
-border:1px solid var(--border);
-background:rgba(255,255,255,0.08);
-padding:10px 14px;
-border-radius:999px;
-font-weight:600;
-font-size:14px;
-cursor:pointer;
-transition: background .12s ease, transform .12s ease;
-display:inline-flex;
-align-items:center;
-justify-content:center;
-text-decoration: none;
-color: var(--text);
+.brand span{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
 }
-.btn:hover{background:rgba(255,255,255,0.14); transform: translateY(-1px);}
+
+    .btn{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.08);
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:600;
+    }
 
     .card{
       border:1px solid var(--border);
