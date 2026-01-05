@@ -293,6 +293,46 @@ h1{font-size:36px}
   transform: translateY(0);
 }
 
+/* =========================================================
+   MICRO-INTERACTIONS & DEPTH
+   ========================================================= */
+
+/* Card hover lift */
+.card{
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.85);
+  border-color: rgba(255,255,255,0.22);
+}
+
+/* Image subtle zoom */
+.card img{
+  transition: transform 0.25s ease;
+}
+
+.card:hover img{
+  transform: scale(1.035);
+}
+
+/* Button press feel */
+.btn{
+  transition:
+    background 0.12s ease,
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.btn:active{
+  transform: translateY(1px);
+}
+
+
 </style>
 </head>
 
@@ -617,6 +657,7 @@ Depending on the project: CAD files, prototype(s), drawings, and a clean revisio
 </body>
 
 </html>
+
 
 
 
