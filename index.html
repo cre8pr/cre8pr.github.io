@@ -365,38 +365,6 @@ h1{font-size:36px}
   }
 }
 
- /* =========================================================
-   TIMELINE VISUAL ENHANCEMENT
-   ========================================================= */
-
-/* Wrapper that holds steps */
-.timeline{
-  position: relative;
-  padding-left: 24px;
-}
-
-/* Vertical line */
-.timeline::before{
-  content: "";
-  position: absolute;
-  top: 6px;
-  left: 13px;
-  width: 1px;
-  height: calc(100% - 12px);
-  background: linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.0),
-    rgba(255,255,255,0.25),
-    rgba(255,255,255,0.0)
-  );
-}
-
-/* Step number emphasis */
-.timeline .num{
-  background: rgba(0,0,0,0.85);
-  z-index: 1;
-}
-
 </style>
 </head>
 
@@ -491,7 +459,6 @@ Simple process: submit problem or solution idea → CAD → prototype → iterat
 </div>
 
 <div class="card reveal col-7">
-<div class="timeline">
 <!-- EDIT: steps text -->
 <div class="step">
 <div class="num">1</div>
@@ -722,8 +689,6 @@ Depending on the project: CAD files, prototype(s), drawings, and a clean revisio
 </body>
 
 </html>
-
-
 
 
 
