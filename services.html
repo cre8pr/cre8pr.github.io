@@ -144,6 +144,14 @@ main{
   font-size:12px;
   color:var(--muted);
 }
+/* =========================================================
+   ACTIVE NAV STATE
+   ========================================================= */
+.nav .btn.active{
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.35);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+}
 
   </style>
 </head>
@@ -183,7 +191,7 @@ main{
 
   <nav class="nav-links">
   <a class="btn" href="index.html">Home</a>
-  <a class="btn" href="services.html">Services</a>
+  <a class="btn active" href="services.html">Services</a>
   <a class="btn" href="about.html">About</a>
   <a class="btn" href="start.html">Start a project</a>
 </nav>
@@ -261,6 +269,7 @@ main{
 </script>
 </body>
 </html>
+
 
 
 
