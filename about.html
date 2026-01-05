@@ -261,6 +261,23 @@ main{
   /* =========================================================
    ACTIVE NAV STATE
    ========================================================= */
+
+    /* =========================================================
+   SCROLL REVEAL ANIMATION
+   ========================================================= */
+.reveal{
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal.visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .nav .btn.active{
   background: rgba(255,255,255,0.18);
   border-color: rgba(255,255,255,0.35);
@@ -319,7 +336,7 @@ main{
     <!-- =========================================================
          EDIT: HERO
          ========================================================= -->
-<section class="card">
+<section class="card reveal">
   <h1>About CRE8 PR</h1>
 
   <p class="lead">
@@ -334,8 +351,8 @@ main{
   </p>
 </section>
 
-<section class="grid">
-  <div class="card col-6">
+<section class="grid reveal">
+  <div class="card col-6 reveal">
     <h3>What we do</h3>
     <p class="lead">
       We help individuals, startups, and small teams take ideas from rough
@@ -344,7 +361,7 @@ main{
     </p>
   </div>
 
-  <div class="card col-6">
+  <div class="card col-6 reveal">
     <h3>How we work</h3>
     <p class="lead">
       Projects typically move through concept development, CAD design,
@@ -354,7 +371,7 @@ main{
   </div>
 </section>
 
-<section class="card">
+<section class="card reveal">
   <h3>Why CRE8 PR</h3>
   <p class="lead">
     CRE8 PR was built with a focus on practical engineering and accessibility.
@@ -426,6 +443,7 @@ ${name}`;
 </body>
 
 </html>
+
 
 
 
