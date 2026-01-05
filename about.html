@@ -407,6 +407,24 @@ main{
 
   /* This makes the footer year always correct */
   document.getElementById("year").textContent = new Date().getFullYear();
+  /* =========================================================
+   SCROLL REVEAL OBSERVER
+   ========================================================= */
+const revealElements = document.querySelectorAll(".reveal");
+
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add("visible");
+      }
+    });
+  },
+  { threshold: 0.15 }
+);
+
+revealElements.forEach(el => revealObserver.observe(el));
+
 
   /* =========================================================
      FORM BEHAVIOR
@@ -414,7 +432,10 @@ main{
      - Later, if you want a real backend form (no email app),
        tell me and I’ll convert it to a proper form submit.
      ========================================================= */
-  document.getElementById("contactForm").addEventListener("submit", (e) => {
+  const contactForm = document.getElementById("contactForm");
+if(contactForm){
+  contactForm.addEventListener("submit", (e) => {
+  }
     e.preventDefault();
 
     const name = document.getElementById("name").value.trim();
@@ -443,6 +464,7 @@ ${name}`;
 </body>
 
 </html>
+
 
 
 
