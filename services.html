@@ -1,359 +1,276 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- EDIT: PAGE TITLE -->
-  <title>Services — CRE8 PR</title>
-
-  <!-- EDIT: META DESCRIPTION -->
-  <meta name="description" content="Engineering design, CAD, prototyping, and small-batch manufacturing services by CRE8 PR." />
-
-  <style>
-    :root{
-      --bg:#070707;
-      --panel:rgba(0,0,0,0.45);
-      --panelStrong:rgba(0,0,0,0.60);
-      --text:rgba(255,255,255,0.92);
-      --muted:rgba(255,255,255,0.65);
-      --border:rgba(255,255,255,0.14);
-      --grid:rgba(255,255,255,0.05);
-      --shadow:0 14px 40px rgba(0,0,0,0.70);
-      --radius:18px;
-    }
-
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      color:var(--text);
-      background:
-        linear-gradient(var(--grid) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
-        var(--bg);
-      background-size:42px 42px;
-    }
-
-.wrap{max-width:1100px;margin:auto;padding:24px}
-
-main{
-  margin-top: 32px;
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Services — CRE8 PR</title>
+<meta name="description" content="Engineering design, CAD, prototyping, and small-batch manufacturing services by CRE8 PR."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080808;
+  --surface:rgba(255,255,255,0.03);
+  --surface2:rgba(255,255,255,0.06);
+  --text:#f0ede8;
+  --muted:rgba(240,237,232,0.5);
+  --accent:#e8ff47;
+  --border:rgba(255,255,255,0.08);
+  --border2:rgba(255,255,255,0.14);
 }
-    a{color:inherit;text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none;}
 
-    .nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  padding:14px 18px;
-  border:1px solid var(--border);
-  background:var(--panelStrong);
-  border-radius:999px;
-  box-shadow:var(--shadow);
-  position:sticky;
-  top:16px;
-  z-index:10;
-  backdrop-filter:blur(10px);
+.cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transition:transform 0.1s ease;mix-blend-mode:difference;}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.18s ease;opacity:0.5;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(8,8,8,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:padding 0.3s ease;}
+nav.scrolled{padding:14px 48px;}
+.nav-brand{display:flex;align-items:center;gap:12px;font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--text);text-decoration:none;}
+.logo-box{width:36px;height:36px;border-radius:8px;overflow:hidden;flex-shrink:0;background:var(--accent);display:grid;place-items:center;}
+.logo-box img{width:100%;height:100%;object-fit:cover;display:block;}
+.logo-fallback{font-family:'Bebas Neue',sans-serif;font-size:14px;color:#080808;letter-spacing:1px;}
+.nav-links{display:flex;gap:4px;align-items:center;}
+.nav-link{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);text-decoration:none;padding:8px 16px;border-radius:4px;transition:all 0.2s;letter-spacing:0.5px;}
+.nav-link:hover,.nav-link.active{color:var(--text);background:var(--surface2);}
+.nav-cta{background:var(--accent);color:#080808 !important;font-weight:600;border-radius:4px;}
+.nav-cta:hover{background:#d4eb3a;transform:translateY(-1px);}
+
+/* PAGE HEADER */
+.page-header{min-height:45vh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px 48px 60px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.page-header-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px;animation:gridShift 25s linear infinite;}
+@keyframes gridShift{0%{background-position:0 0,0 0;}100%{background-position:60px 60px,60px 60px;}}
+.page-header-orb{position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(232,255,71,0.06) 0%,transparent 70%);border-radius:50%;animation:orbPulse 6s ease-in-out infinite;}
+@keyframes orbPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+.page-eyebrow{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:16px;opacity:0;animation:fadeUp 0.7s 0.2s forwards;}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,120px);line-height:0.9;letter-spacing:-1px;opacity:0;animation:fadeUp 0.7s 0.35s forwards;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+.content{padding:80px 48px 100px;max-width:1100px;margin:0 auto;}
+
+.section-divider{display:flex;align-items:center;gap:16px;margin-bottom:48px;}
+.section-divider h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,56px);line-height:1;flex-shrink:0;}
+.section-divider-line{height:1px;background:var(--border);flex:1;}
+
+/* SERVICE ITEMS — big accordion-style rows */
+.service-row{
+  display:grid;grid-template-columns:80px 1fr auto;align-items:start;gap:32px;
+  padding:48px 0;border-bottom:1px solid var(--border);
+  transition:background 0.2s;cursor:default;
+  position:relative;
 }
-
-    /* ===== MOBILE NAV OVERRIDE (MATCHES INDEX) ===== */
-.nav-links{
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-
-@media (max-width: 720px){
-  .nav{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:12px;
-
-    /* kills the giant pill on mobile */
-    border-radius:18px;
-  }
-
-  .nav-links{
-    width:100%;
-    flex-wrap:wrap;
-  }
-
-  .nav-links .btn{
-    flex:1 1 auto;
-    text-align:center;
-  }
+.service-row::before{content:'';position:absolute;left:-48px;right:-48px;top:0;bottom:0;background:var(--surface);opacity:0;transition:opacity 0.3s;}
+.service-row:hover::before{opacity:1;}
+.service-row:first-child{border-top:1px solid var(--border);}
+.service-num{font-family:'Bebas Neue',sans-serif;font-size:48px;color:rgba(232,255,71,0.3);line-height:1;position:relative;z-index:1;}
+.service-body{position:relative;z-index:1;}
+.service-body h3{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;margin-bottom:12px;}
+.service-body p{color:var(--muted);line-height:1.8;font-size:15px;max-width:56ch;}
+.service-tag{
+  font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);
+  border:1px solid rgba(232,255,71,0.3);padding:6px 12px;border-radius:2px;
+  letter-spacing:1px;white-space:nowrap;position:relative;z-index:1;margin-top:6px;
 }
 
-
-    .brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
+/* TIMELINE */
+.timeline{margin-top:0;}
+.timeline-row{
+  display:grid;grid-template-columns:120px 1fr;gap:0;
+  border-bottom:1px solid var(--border);
 }
-
-.brand span{
-  display:block;
-  font-size:12px;
-  color:var(--muted);
+.timeline-row:first-child{border-top:1px solid var(--border);}
+.timeline-week{
+  padding:32px;border-right:1px solid var(--border);
+  font-family:'DM Mono',monospace;font-size:12px;color:var(--accent);
+  letter-spacing:1px;display:flex;align-items:center;
 }
+.timeline-content{padding:32px;}
+.timeline-content h4{font-size:16px;font-weight:600;margin-bottom:6px;}
+.timeline-content p{color:var(--muted);font-size:14px;line-height:1.7;}
 
-.brand b{
-  font-size:16px;
-  letter-spacing:0.4px;
-  color: var(--text);
+/* CTA */
+.cta-section{background:var(--accent);border-radius:8px;padding:72px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px;position:relative;overflow:hidden;margin-top:80px;}
+.cta-section::before{content:'CRE8';position:absolute;right:-20px;bottom:-40px;font-family:'Bebas Neue',sans-serif;font-size:200px;color:rgba(0,0,0,0.06);line-height:1;pointer-events:none;}
+.cta-section h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,56px);color:#080808;line-height:1;}
+.cta-section p{color:rgba(8,8,8,0.6);font-size:15px;margin-top:10px;max-width:36ch;line-height:1.6;}
+.btn-dark{background:#080808;color:var(--accent);font-weight:700;font-size:14px;padding:16px 32px;border-radius:4px;text-decoration:none;letter-spacing:0.5px;transition:all 0.2s;flex-shrink:0;display:inline-block;}
+.btn-dark:hover{background:#1a1a1a;transform:translateY(-2px);}
+
+footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:0.5px;}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s cubic-bezier(.2,.8,.2,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:0.1s;}
+.reveal-delay-2{transition-delay:0.2s;}
+.reveal-delay-3{transition-delay:0.3s;}
+.reveal-delay-4{transition-delay:0.4s;}
+
+@media(max-width:900px){
+  nav{padding:16px 24px;}
+  .page-header{padding:100px 24px 48px;}
+  .content{padding:48px 24px 60px;}
+  .service-row{grid-template-columns:60px 1fr;gap:16px;}
+  .service-tag{display:none;}
+  .timeline-row{grid-template-columns:80px 1fr;}
+  .cta-section{padding:48px 32px;flex-direction:column;align-items:flex-start;}
+  footer{flex-direction:column;gap:12px;text-align:center;padding:24px;}
 }
-
-    .btn{
-  border:1px solid var(--border);
-  background:rgba(255,255,255,0.08);
-  padding:10px 14px;
-  border-radius:999px;
-  font-weight:600;
-  font-size:14px;
-  cursor:pointer;
-  transition: background .12s ease, transform .12s ease;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration: none;
-  color: var(--text);
+@media(max-width:600px){
+  .service-row{grid-template-columns:1fr;gap:8px;}
+  .service-num{font-size:32px;}
+  .nav-links .nav-link:not(.nav-cta){display:none;}
 }
-
-
-    .card{
-      border:1px solid var(--border);
-      background:var(--panel);
-      border-radius:var(--radius);
-      padding:26px;
-      box-shadow:var(--shadow);
-      margin-top:24px;
-    }
-
-    h1{font-size:44px;margin:0 0 12px}
-    h3{margin:16px 0 6px}
-    .lead{color:var(--muted);line-height:1.6}
-
-    footer{
-      margin:32px 0 12px;
-      text-align:center;
-      font-size:12px;
-      color:var(--muted);
-    }
-    .proto-figure{
-  margin:20px 0 8px;
-  text-align:center;
-}
-
-.proto-figure img{
-  width:100%;
-  max-width:520px;
-  border-radius:14px;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-}
-
-.proto-figure figcaption{
-  margin-top:8px;
-  font-size:12px;
-  color:var(--muted);
-}
-/* =========================================================
-   ACTIVE NAV STATE
-   ========================================================= */
-.nav .btn.active{
-  background: rgba(255,255,255,0.18);
-  border-color: rgba(255,255,255,0.35);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
-}
-
-    .reveal{
-  opacity: 0;
-  transform: translateY(18px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s cubic-bezier(.2,.8,.2,1);
-}
-
-.reveal.visible{
-  opacity: 1;
-  transform: translateY(0);
-}
-.card{
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    border-color 0.18s ease;
-}
-
-.card:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.85);
-  border-color: rgba(255,255,255,0.22);
-}
-
-.card img{
-  transition: transform 0.25s ease;
-}
-
-.card:hover img{
-  transform: scale(1.035);
-}
-
-
-  </style>
+</style>
 </head>
-
 <body>
-<div class="wrap">
 
-<header class="nav">
-  <a class="brand" href="index.html">
-  <div
-  style="
-    width:34px;
-    height:34px;
-    border-radius:10px;
-    overflow:hidden;
-    flex-shrink:0;
-  "
->
-  <img
-    src="logo.png"
-    alt="CRE8 PR logo"
-    style="
-      width:100%;
-      height:100%;
-      display:block;
-    "
-  />
-</div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-
-  <div>
-    <b>CRE8 PR</b>
-    <span>Design · Prototype · Build</span>
+<nav id="nav">
+  <a class="nav-brand" href="index.html">
+    <div class="logo-box">
+      <img src="logo.png" alt="CRE8 PR" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo-fallback" style="display:none">C8</span>
+    </div>
+    CRE8 PR
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link active" href="services.html">Services</a>
+    <a class="nav-link" href="about.html">About</a>
+    <a class="nav-link nav-cta" href="start.html">Start a project</a>
   </div>
-</a>
-
-
-  <nav class="nav-links">
-  <a class="btn" href="index.html">Home</a>
-  <a class="btn active" href="services.html">Services</a>
-  <a class="btn" href="about.html">About</a>
-  <a class="btn" href="start.html">Start a project</a>
 </nav>
 
-</header>
-  
-<main>
-
-<section class="card reveal">
-  <h1>Services</h1>
-
-  <!-- EDIT: SERVICES DESCRIPTION -->
-  <p class="lead">
-    CRE8 PR provides end-to-end engineering design and prototyping services.
-    Engagements can start from either a defined solution idea or an open-ended
-    problem statement.
-  </p>
-
-  <p class="lead" style="margin-top:12px">
-  Typical engagements run approximately <b>2–6 weeks</b>, depending on scope,
-  complexity, and iteration requirements.
-  </p>
-
-  <h3>Concept Development</h3>
-  <p class="lead">
-    We translate your idea or problem into a clear engineering concept, identifying
-    constraints, use cases, and success criteria.
-  </p>
-
-  <h3>CAD & Engineering Design</h3>
-  <p class="lead">
-    Parametric 3D models and assemblies designed with real-world manufacturing,
-    tolerances, and materials in mind.
-  </p>
-
-  <h3>Prototyping</h3>
-  <p class="lead">
-    Rapid prototyping via 3D printing or simple fabrication to validate form, fit,
-    and function.
-  </p>
-  <figure class="proto-figure">
-  <img
-    src="bambu.png"
-    alt="Desktop 3D printer producing a prototype part"
-  />
-  <figcaption>
-    Example of desktop FDM prototyping.
-    Image source: Geeky Gadgets — Bambu Lab A1 Mini review.
-  </figcaption>
-</figure>
-
-
-  <h3>Iteration & Refinement</h3>
-  <p class="lead">
-    Designs are refined based on physical testing and user feedback until the
-    solution meets performance and usability goals.
-  </p>
-
-  <h3>Small-Batch Manufacturing</h3>
-  <p class="lead">
-    Once validated, we assist with short production runs or transition the design
-    to a manufacturing partner.
-  </p>
-</section>
-
-<footer>
-  © <span id="year"></span> CRE8 PR · Puerto Rico
-</footer>
-
-</main>
+<div class="page-header">
+  <div class="page-header-grid"></div>
+  <div class="page-header-orb"></div>
+  <p class="page-eyebrow">What we offer</p>
+  <h1 class="page-title">Our<br><span style="-webkit-text-stroke:1px rgba(240,237,232,0.3);color:transparent;">Services</span></h1>
 </div>
 
+<div class="content">
+
+  <div class="section-divider reveal">
+    <h2>End-to-End</h2>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <p class="reveal" style="color:var(--muted);font-size:16px;line-height:1.8;max-width:64ch;margin-bottom:60px;">
+    Engagements can start from either a defined solution idea or an open-ended problem statement. Typical projects run <strong style="color:var(--text)">2–6 weeks</strong> depending on scope and iteration.
+  </p>
+
+  <div class="service-row reveal">
+    <div class="service-num">01</div>
+    <div class="service-body">
+      <h3>Concept Development</h3>
+      <p>We translate your idea or problem into a clear engineering concept — identifying constraints, use cases, and what success actually looks like before a single line is drawn.</p>
+    </div>
+    <div class="service-tag">~1 WEEK</div>
+  </div>
+
+  <div class="service-row reveal">
+    <div class="service-num">02</div>
+    <div class="service-body">
+      <h3>CAD & Engineering Design</h3>
+      <p>Parametric 3D models and assemblies designed with real-world manufacturing, tolerances, and materials in mind. Not just pretty renders — files that can actually be built.</p>
+    </div>
+    <div class="service-tag">~1–2 WEEKS</div>
+  </div>
+
+  <div class="service-row reveal">
+    <div class="service-num">03</div>
+    <div class="service-body">
+      <h3>Rapid Prototyping</h3>
+      <p>Physical prototypes via 3D printing or fabrication to validate form, fit, and function fast. We get something in your hands before assumptions become expensive mistakes.</p>
+    </div>
+    <div class="service-tag">~1 WEEK</div>
+  </div>
+
+  <div class="service-row reveal">
+    <div class="service-num">04</div>
+    <div class="service-body">
+      <h3>Iteration & Refinement</h3>
+      <p>Designs refined based on physical testing and real feedback. We test, break things on purpose, and improve until the solution actually works.</p>
+    </div>
+    <div class="service-tag">~1–3 WEEKS</div>
+  </div>
+
+  <div class="service-row reveal">
+    <div class="service-num">05</div>
+    <div class="service-body">
+      <h3>Small-Batch Manufacturing</h3>
+      <p>Once validated, we assist with short production runs or transition the design to a manufacturing partner with clean, production-ready files and documentation.</p>
+    </div>
+    <div class="service-tag">VARIES</div>
+  </div>
+
+  <div class="section-divider reveal" style="margin-top:80px">
+    <h2>Typical Timeline</h2>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="timeline reveal">
+    <div class="timeline-row">
+      <div class="timeline-week">WEEK 1</div>
+      <div class="timeline-content">
+        <h4>Concept & Constraints</h4>
+        <p>Define requirements, use cases, and success criteria. Align on scope.</p>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-week">WEEK 1–2</div>
+      <div class="timeline-content">
+        <h4>CAD & Initial Prototype</h4>
+        <p>Design, model, and fabricate first prototype. Get something physical fast.</p>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-week">WEEK 2–5</div>
+      <div class="timeline-content">
+        <h4>Iteration & Refinement</h4>
+        <p>Test, revise, and improve performance or fit based on real feedback.</p>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-week">FINAL</div>
+      <div class="timeline-content">
+        <h4>Build or Handoff</h4>
+        <p>Final prototype, small batch build, or manufacturing-ready files and documentation.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section reveal">
+    <div>
+      <h2>Have a project<br>in mind?</h2>
+      <p>Tell us what you're building and we'll get it moving.</p>
+    </div>
+    <a class="btn-dark" href="start.html">Start a project →</a>
+  </div>
+
+</div>
+
+<footer>
+  <span>© <span id="year"></span> CRE8 PR · Puerto Rico</span>
+  <span>Design · Prototype · Build</span>
+</footer>
+
 <script>
-  /* Footer year */
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  /* =========================================================
-     SCROLL REVEAL OBSERVER
-     ========================================================= */
-  const revealElements = document.querySelectorAll(".reveal");
-
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add("visible");
-        }
-      });
-    },
-    {
-      threshold: 0.15
-    }
-  );
-
-  revealElements.forEach(el => revealObserver.observe(el));
+document.getElementById('year').textContent = new Date().getFullYear();
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=(mx-5)+'px';cursor.style.top=(my-5)+'px';});
+(function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=(rx-18)+'px';ring.style.top=(ry-18)+'px';requestAnimationFrame(animRing);})();
+document.querySelectorAll('a,button,.service-row,.timeline-row').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.transform='scale(2.5)';ring.style.transform='scale(1.5)';ring.style.opacity='0.8';});
+  el.addEventListener('mouseleave',()=>{cursor.style.transform='scale(1)';ring.style.transform='scale(1)';ring.style.opacity='0.5';});
+});
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);});
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 </script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
