@@ -1,335 +1,231 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Start a Project — CRE8 PR</title>
-
-  <meta name="description" content="Start a design or prototyping project with CRE8 PR." />
-
-  <style>
-    :root{
-      --bg:#070707;
-      --panel:rgba(0,0,0,0.45);
-      --panelStrong:rgba(0,0,0,0.60);
-      --text:rgba(255,255,255,0.92);
-      --muted:rgba(255,255,255,0.65);
-      --border:rgba(255,255,255,0.14);
-      --grid:rgba(255,255,255,0.05);
-      --shadow:0 14px 40px rgba(0,0,0,0.70);
-      --radius:18px;
-    }
-
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      color:var(--text);
-      background:
-        linear-gradient(var(--grid) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
-        var(--bg);
-      background-size:42px 42px;
-    }
-
-    a{color:inherit;text-decoration:none}
-    .wrap{
-  max-width:1100px;
-  margin:auto;
-  padding:24px;
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Start a Project — CRE8 PR</title>
+<meta name="description" content="Start a design or prototyping project with CRE8 PR."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080808;
+  --surface:rgba(255,255,255,0.03);
+  --surface2:rgba(255,255,255,0.06);
+  --text:#f0ede8;
+  --muted:rgba(240,237,232,0.5);
+  --accent:#e8ff47;
+  --border:rgba(255,255,255,0.08);
+  --border2:rgba(255,255,255,0.14);
 }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none;}
 
+.cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transition:transform 0.1s ease;mix-blend-mode:difference;}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.18s ease;opacity:0.5;}
 
-  .nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  padding:14px 18px;
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(8,8,8,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:padding 0.3s ease;}
+nav.scrolled{padding:14px 48px;}
+.nav-brand{display:flex;align-items:center;gap:12px;font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--text);text-decoration:none;}
+.logo-box{width:36px;height:36px;border-radius:8px;overflow:hidden;flex-shrink:0;background:var(--accent);display:grid;place-items:center;}
+.logo-box img{width:100%;height:100%;object-fit:cover;display:block;}
+.logo-fallback{font-family:'Bebas Neue',sans-serif;font-size:14px;color:#080808;letter-spacing:1px;}
+.nav-links{display:flex;gap:4px;align-items:center;}
+.nav-link{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);text-decoration:none;padding:8px 16px;border-radius:4px;transition:all 0.2s;letter-spacing:0.5px;}
+.nav-link:hover,.nav-link.active{color:var(--text);background:var(--surface2);}
+.nav-cta{background:var(--accent);color:#080808 !important;font-weight:600;border-radius:4px;}
+.nav-cta:hover{background:#d4eb3a;transform:translateY(-1px);}
+
+/* PAGE HEADER */
+.page-header{min-height:45vh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px 48px 60px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.page-header-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px;animation:gridShift 25s linear infinite;}
+@keyframes gridShift{0%{background-position:0 0,0 0;}100%{background-position:60px 60px,60px 60px;}}
+.page-header-orb{position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(232,255,71,0.06) 0%,transparent 70%);border-radius:50%;animation:orbPulse 6s ease-in-out infinite;}
+@keyframes orbPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+.page-eyebrow{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:16px;opacity:0;animation:fadeUp 0.7s 0.2s forwards;}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,120px);line-height:0.9;letter-spacing:-1px;opacity:0;animation:fadeUp 0.7s 0.35s forwards;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* LAYOUT */
+.content{padding:80px 48px 100px;max-width:1100px;margin:0 auto;}
+.form-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:start;}
+
+/* LEFT INFO PANEL */
+.info-panel{}
+.section-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:24px;}
+.info-panel p{color:var(--muted);font-size:15px;line-height:1.8;margin-bottom:32px;}
+.expectation{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid var(--border);}
+.expectation:first-of-type{border-top:1px solid var(--border);}
+.exp-num{font-family:'Bebas Neue',sans-serif;font-size:32px;color:rgba(232,255,71,0.4);flex-shrink:0;line-height:1;}
+.exp-text h4{font-size:14px;font-weight:600;margin-bottom:4px;}
+.exp-text p{color:var(--muted);font-size:13px;line-height:1.6;margin:0;}
+
+/* FORM */
+.form-card{background:var(--surface);border:1px solid var(--border);padding:48px;}
+.form-card h2{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;margin-bottom:32px;}
+
+.field{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.field label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+.field input,.field textarea{
+  width:100%;padding:14px 16px;
+  background:rgba(0,0,0,0.4);
   border:1px solid var(--border);
-  background:var(--panelStrong);
-  border-radius:999px;
-  box-shadow:var(--shadow);
-  position:sticky;
-  top:16px;
-  z-index:10;
-  backdrop-filter:blur(10px);
+  border-radius:4px;color:var(--text);
+  font-family:'DM Sans',sans-serif;font-size:14px;
+  outline:none;transition:border-color 0.2s;
+  -webkit-appearance:none;
 }
+.field input:focus,.field textarea:focus{border-color:var(--accent);}
+.field input::placeholder,.field textarea::placeholder{color:rgba(240,237,232,0.2);}
+.field textarea{min-height:120px;resize:vertical;}
 
-  .brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
+.submit-btn{
+  width:100%;padding:16px;
+  background:var(--accent);color:#080808;
+  font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;
+  border:none;border-radius:4px;cursor:none;
+  letter-spacing:0.5px;transition:all 0.2s;
+  margin-top:8px;
 }
+.submit-btn:hover{background:#d4eb3a;transform:translateY(-2px);box-shadow:0 8px 30px rgba(232,255,71,0.3);}
+.submit-btn:active{transform:translateY(0);}
 
-.brand b{
-  font-size:16px;
-  letter-spacing:0.4px;
-  color: var(--text);
+footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:0.5px;}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s cubic-bezier(.2,.8,.2,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:0.15s;}
+
+@media(max-width:900px){
+  nav{padding:16px 24px;}
+  .page-header{padding:100px 24px 48px;}
+  .content{padding:48px 24px 60px;}
+  .form-layout{grid-template-columns:1fr;}
+  .form-card{padding:32px 24px;}
+  footer{flex-direction:column;gap:12px;text-align:center;padding:24px;}
 }
-
-.brand span{
-  display:block;
-  font-size:12px;
-  color:var(--muted);
+@media(max-width:600px){
+  .nav-links .nav-link:not(.nav-cta){display:none;}
 }
-.btn{
-  border:1px solid var(--border);
-  background:rgba(255,255,255,0.08);
-  padding:10px 14px;
-  border-radius:999px;
-  font-weight:600;
-  font-size:14px;
-  cursor:pointer;
-  transition: background .12s ease, transform .12s ease;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration:none;
-  color:var(--text);
-}
-
-.btn:hover{
-  background:rgba(255,255,255,0.14);
-  transform: translateY(-1px);
-}
-
-
-.nav-links{
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-
-/* Mobile behavior — EXACT match */
-@media (max-width: 720px){
-  .nav{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:12px;
-    border-radius:18px;
-  }
-
-  .nav-links{
-    width:100%;
-    flex-wrap:wrap;
-  }
-
-  .nav-links .btn{
-    flex:1 1 auto;
-    text-align:center;
-  }
-}
-
-
-    main{margin-top:32px}
-
-    .card{
-      border:1px solid var(--border);
-      background:var(--panel);
-      border-radius:var(--radius);
-      padding:28px;
-      box-shadow:var(--shadow);
-      margin-bottom:24px;
-    }
-
-    h1{margin:0 0 12px;font-size:40px}
-    h3{margin:18px 0 8px}
-    .lead{color:var(--muted);line-height:1.6}
-
-    form{display:grid;gap:14px;margin-top:12px}
-    label{font-size:12px;color:var(--muted)}
-    input,textarea{
-      width:100%;
-      padding:12px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:rgba(0,0,0,0.4);
-      color:var(--text);
-    }
-    textarea{min-height:140px;resize:vertical}
-
-    footer{
-      margin:40px 0 12px;
-      text-align:center;
-      font-size:12px;
-      color:var(--muted);
-    }
-    /* =========================================================
-   CARD HOVER LIFT (SAFE WITH REVEAL)
-   ========================================================= */
-.card{
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    border-color 0.18s ease;
-}
-
-.card.reveal.visible:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.85);
-  border-color: rgba(255,255,255,0.22);
-}
-
-  /* =========================================================
-   ACTIVE NAV STATE
-   ========================================================= */
-/* =========================================================
-   SCROLL REVEAL
-   ========================================================= */
-.reveal{
-  opacity: 0;
-  transform: translateY(18px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s cubic-bezier(.2,.8,.2,1);
-}
-
-.reveal.visible{
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.nav .btn.active{
-  background: rgba(255,255,255,0.18);
-  border-color: rgba(255,255,255,0.35);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
-}
-
-  </style>
+</style>
 </head>
-
 <body>
-<div class="wrap">
 
-<header class="nav">
-  <a class="brand" href="index.html">
-    <div style="
-      width:34px;
-      height:34px;
-      border-radius:10px;
-      overflow:hidden;
-      flex-shrink:0;
-    ">
-      <img
-        src="logo.png"
-        alt="CRE8 PR logo"
-        style="
-          width:100%;
-          height:100%;
-          display:block;
-        "
-      />
-    </div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-    <div>
-      <b>CRE8 PR</b>
-      <span>Design · Prototype · Build</span>
+<nav id="nav">
+  <a class="nav-brand" href="index.html">
+    <div class="logo-box">
+      <img src="logo.png" alt="CRE8 PR" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo-fallback" style="display:none">C8</span>
     </div>
+    CRE8 PR
   </a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="services.html">Services</a>
+    <a class="nav-link" href="about.html">About</a>
+    <a class="nav-link active nav-cta" href="start.html">Start a project</a>
+  </div>
+</nav>
 
-  <nav class="nav-links">
-    <a class="btn" href="index.html">Home</a>
-    <a class="btn" href="services.html">Services</a>
-    <a class="btn" href="about.html">About</a>
-    <a class="btn active" href="start.html">Start a project</a>
-  </nav>
-</header>
-
-
-<main>
-
-<section class="card reveal">
-  <h1>Start a project</h1>
-  <p class="lead">
-    Tell us what you’re trying to build, improve, or figure out.
-    You don’t need a finished idea — just a problem worth solving.
-  </p>
-</section>
-
-<section class="card reveal">
-  <h3>Project details</h3>
-
-  <form action="https://formspree.io/f/xnjqlwdq" method="POST" enctype="multipart/form-data">
-
-  <input type="hidden" name="_subject" value="New CRE8 PR Project Request">
-
-    <div>
-      <label>Name</label>
-      <input name="name" required placeholder="Your name" />
-    </div>
-
-    <div>
-      <label>Email</label>
-      <input name="email" type="email" required placeholder="you@email.com" />
-    </div>
-
-    <div>
-      <label>What are you trying to build or solve?</label>
-      <textarea name="problem" required></textarea>
-    </div>
-
-    <div>
-  <label>Constraints or requirements (optional)</label>
-  <textarea name="constraints"></textarea>
+<div class="page-header">
+  <div class="page-header-grid"></div>
+  <div class="page-header-orb"></div>
+  <p class="page-eyebrow">Let's build something</p>
+  <h1 class="page-title">Start a<br><span style="-webkit-text-stroke:1px rgba(240,237,232,0.3);color:transparent;">Project</span></h1>
 </div>
 
-<div>
-  <label>Reference files or links (optional)</label>
-  <textarea
-    name="files_link"
-    placeholder="Paste a Google Drive link with any relevant files (preliminary sketches, etc.)"
-  ></textarea>
-</div>
+<div class="content">
+  <div class="form-layout">
 
-<button class="btn" type="submit">Generate email</button>
-  </form>
-</section>
+    <!-- LEFT: INFO -->
+    <div class="info-panel reveal">
+      <p class="section-label">What to expect</p>
+      <p>You don't need a finished idea — just a problem worth solving. Tell us what you're trying to build, improve, or figure out and we'll take it from there.</p>
+
+      <div class="expectation">
+        <div class="exp-num">01</div>
+        <div class="exp-text">
+          <h4>We'll review your submission</h4>
+          <p>Within 1–2 business days we'll review and follow up with questions or a project outline.</p>
+        </div>
+      </div>
+      <div class="expectation">
+        <div class="exp-num">02</div>
+        <div class="exp-text">
+          <h4>Scope & timeline call</h4>
+          <p>A short call to align on constraints, goals, and what success looks like for your project.</p>
+        </div>
+      </div>
+      <div class="expectation">
+        <div class="exp-num">03</div>
+        <div class="exp-text">
+          <h4>We get to work</h4>
+          <p>First prototype typically in hand within 1–2 weeks of kickoff.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: FORM -->
+    <div class="form-card reveal reveal-delay-1">
+      <h2>Project Details</h2>
+
+      <form action="https://formspree.io/f/xnjqlwdq" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="New CRE8 PR Project Request">
+
+        <div class="field">
+          <label>Name</label>
+          <input name="name" required placeholder="Your name"/>
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input name="email" type="email" required placeholder="you@email.com"/>
+        </div>
+
+        <div class="field">
+          <label>What are you trying to build or solve?</label>
+          <textarea name="problem" required placeholder="Describe the problem or idea as clearly as you can. Rough is fine."></textarea>
+        </div>
+
+        <div class="field">
+          <label>Constraints or requirements (optional)</label>
+          <textarea name="constraints" placeholder="Budget, timeline, materials, size, use case..."></textarea>
+        </div>
+
+        <div class="field">
+          <label>Reference files or links (optional)</label>
+          <textarea name="files_link" style="min-height:80px" placeholder="Paste a Google Drive link with sketches, references, or relevant files."></textarea>
+        </div>
+
+        <button class="submit-btn" type="submit">Send project brief →</button>
+      </form>
+    </div>
+
+  </div>
+</div>
 
 <footer>
-  © <span id="year"></span> CRE8 PR · Puerto Rico
+  <span>© <span id="year"></span> CRE8 PR · Puerto Rico</span>
+  <span>Design · Prototype · Build</span>
 </footer>
 
-</main>
-</div>
-
 <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  /* =========================================================
-     SCROLL REVEAL OBSERVER
-     ========================================================= */
-  const revealElements = document.querySelectorAll(".reveal");
-
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add("visible");
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
-
-  revealElements.forEach(el => revealObserver.observe(el));
+document.getElementById('year').textContent = new Date().getFullYear();
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=(mx-5)+'px';cursor.style.top=(my-5)+'px';});
+(function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=(rx-18)+'px';ring.style.top=(ry-18)+'px';requestAnimationFrame(animRing);})();
+document.querySelectorAll('a,button,.submit-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.transform='scale(2.5)';ring.style.transform='scale(1.5)';ring.style.opacity='0.8';});
+  el.addEventListener('mouseleave',()=>{cursor.style.transform='scale(1)';ring.style.transform='scale(1)';ring.style.opacity='0.5';});
+});
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);});
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 </script>
-
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
