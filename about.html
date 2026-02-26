@@ -1,461 +1,252 @@
-<!--
-  CRE8 PR — Single-file website (index.html)
-  ------------------------------------------------------------
-  HOW TO USE
-  1) Copy this entire file into a new file named: index.html
-  2) Put your images in the SAME folder as index.html (or adjust paths)
-  3) Open index.html in your browser
-
-  WHAT TO EDIT (easy)
-  - Title (browser tab):      SEARCH "EDIT: PAGE TITLE"
-  - Social preview text:       SEARCH "EDIT: META DESCRIPTION"
-  - Brand name in navbar:      SEARCH "EDIT: BRAND NAME"
-  - Colors + background:       SEARCH "EDIT: THEME COLORS"
-  - Hero text:                 SEARCH "EDIT: HERO"
-  - Services text/images:      SEARCH "EDIT: SERVICES"
-  - Contact email:             SEARCH "EDIT: CONTACT EMAIL"
-  - Footer text/year:          SEARCH "EDIT: FOOTER"
-
-  TIP: Press Ctrl+F (or Cmd+F) and search for "EDIT:" to jump around.
--->
-
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- =========================================================
-       EDIT: PAGE TITLE (shows on browser tab)
-       ========================================================= -->
-  <title>CRE8 PR — Design & Prototyping Studio</title>
-
-  <!-- =========================================================
-       EDIT: META DESCRIPTION (shows in Google previews + sharing)
-       Keep it 1–2 sentences.
-       ========================================================= -->
-  <meta
-    name="description"
-    content="CRE8 PR is an engineering design and prototyping studio turning ideas into real, manufacturable objects through CAD and rapid iteration."
-  />
-
-  <style>
-    /* =========================================================
-       EDIT: THEME COLORS (this is the easiest place to change vibe)
-       ---------------------------------------------------------
-       - Background:     --bg
-       - Text color:     --text
-       - Muted text:     --muted
-       - Borders:        --border
-       - Card background --panel
-       - Grid lines:     --grid
-       ========================================================= */
-    :root{
-      --bg:#070707;                 /* main page background */
-      --panel:rgba(0,0,0,0.45);     /* card background */
-      --panelStrong:rgba(0,0,0,0.60);/* nav background */
-      --text:rgba(255,255,255,0.92);/* main text */
-      --muted:rgba(255,255,255,0.65);/* smaller text */
-      --border:rgba(255,255,255,0.14);/* border lines */
-      --grid:rgba(255,255,255,0.05); /* background grid lines */
-      --shadow:0 14px 40px rgba(0,0,0,0.70);
-      --radius:18px;
-    }
-
-    /* Basic resets */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      color:var(--text);
-
-      /* =========================================================
-         EDIT: BACKGROUND STYLE
-         - If you want NO grid, remove the 2 linear-gradient lines.
-         - If you want grid larger/smaller, change 42px below.
-         ========================================================= */
-      background:
-        linear-gradient(var(--grid) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
-        var(--bg);
-      background-size: 42px 42px;
-    }
-
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:1100px;margin:auto;padding:24px}
-
-    /* =========================================================
-       NAVBAR
-       ========================================================= */
-    .nav{
-      display:flex;align-items:center;justify-content:space-between;
-      gap:16px;
-      padding:14px 18px;
-      border:1px solid var(--border);
-      background:var(--panelStrong);
-      border-radius:999px;
-      box-shadow:var(--shadow);
-      position:sticky;top:16px;z-index:10;
-      backdrop-filter:blur(10px);
-    }
-    /* ===== MOBILE NAV OVERRIDE (matches index.html) ===== */
-.nav-links{
-  display:flex;
-  gap:8px;
-  align-items:center;
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>About — CRE8 PR</title>
+<meta name="description" content="CRE8 PR is an engineering design and prototyping studio focused on turning early-stage ideas into real, functional objects."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080808;
+  --surface:rgba(255,255,255,0.03);
+  --surface2:rgba(255,255,255,0.06);
+  --text:#f0ede8;
+  --muted:rgba(240,237,232,0.5);
+  --accent:#e8ff47;
+  --border:rgba(255,255,255,0.08);
+  --border2:rgba(255,255,255,0.14);
 }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none;}
 
-@media (max-width: 720px){
-  .nav{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:12px;
+.cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transition:transform 0.1s ease;mix-blend-mode:difference;}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.18s ease;opacity:0.5;}
 
-    /* THIS is the key line */
-    border-radius:18px;
-  }
-
-  .nav-links{
-    width:100%;
-    flex-wrap:wrap;
-  }
-
-  .nav-links .btn{
-    flex:1 1 auto;
-    text-align:center;
-  }
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 48px;
+  background:rgba(8,8,8,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:padding 0.3s ease;
 }
+nav.scrolled{padding:14px 48px;}
+.nav-brand{display:flex;align-items:center;gap:12px;font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--text);text-decoration:none;}
+.logo-box{width:36px;height:36px;border-radius:8px;overflow:hidden;flex-shrink:0;background:var(--accent);display:grid;place-items:center;}
+.logo-box img{width:100%;height:100%;object-fit:cover;display:block;}
+.logo-fallback{font-family:'Bebas Neue',sans-serif;font-size:14px;color:#080808;letter-spacing:1px;}
+.nav-links{display:flex;gap:4px;align-items:center;}
+.nav-link{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);text-decoration:none;padding:8px 16px;border-radius:4px;transition:all 0.2s;letter-spacing:0.5px;}
+.nav-link:hover,.nav-link.active{color:var(--text);background:var(--surface2);}
+.nav-cta{background:var(--accent);color:#080808 !important;font-weight:600;border-radius:4px;}
+.nav-cta:hover{background:#d4eb3a;transform:translateY(-1px);}
 
-
-    .brand{display:flex;align-items:center;gap:12px}
-    .brand b{font-size:16px;letter-spacing:0.4px}
-    .brand span{display:block;font-size:12px;color:var(--muted)}
-
-    /* Buttons */
-    .btn{
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.08);
-      padding:10px 14px;
-      border-radius:999px;
-      font-weight:600;
-      font-size:14px;
-      cursor:pointer;
-      transition: background .12s ease, transform .12s ease;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .btn:hover{background:rgba(255,255,255,0.14); transform: translateY(-1px);}
-
-    /* =========================================================
-       HERO (top section)
-       ========================================================= */
-    .hero{
-      margin-top:28px;
-      display:grid;
-      grid-template-columns:1.2fr 0.8fr;
-      gap:20px;
-    }
-    .card{
-      border:1px solid var(--border);
-      background:var(--panel);
-      border-radius:var(--radius);
-      padding:26px;
-      box-shadow:var(--shadow);
-    }
-
-    h1{
-      margin:0 0 12px;
-      font-size:44px;
-      letter-spacing:-0.6px;
-      line-height:1.05;
-    }
-    .lead{
-      color:var(--muted);
-      max-width:62ch;
-      line-height:1.5;
-    }
-
-    /* =========================================================
-       LAYOUT GRID HELPERS
-       ========================================================= */
-    section{margin-top:32px}
-
-main{
-  padding-top: 24px;
+/* PAGE HEADER */
+.page-header{
+  min-height:45vh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:120px 48px 60px;
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--border);
 }
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-    .col-12{grid-column:span 12}
-    .col-6{grid-column:span 6}
-    .col-7{grid-column:span 7}
-    .col-5{grid-column:span 5}
-
-    /* =========================================================
-       HOW IT WORKS (steps)
-       ========================================================= */
-    .step{
-      display:flex;gap:12px;
-      padding:14px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:rgba(0,0,0,0.30);
-      margin-bottom:10px;
-    }
-    .num{
-      width:28px;height:28px;
-      border-radius:10px;
-      display:grid;place-items:center;
-      border:1px solid var(--border);
-      font-weight:700;
-      flex:0 0 auto;
-    }
-
-    /* =========================================================
-       SERVICES (image cards)
-       ========================================================= */
-    .serviceCard img{
-      width:100%;
-      border-radius:12px;
-      display:block;
-    }
-    .serviceCard h3{
-      margin:12px 0 6px;
-      font-size:16px;
-      letter-spacing:0.2px;
-    }
-    .serviceCard p{margin:0;color:var(--muted);line-height:1.5}
-
-    /* =========================================================
-       FORM
-       ========================================================= */
-    form{display:grid;gap:10px}
-    label{font-size:12px;color:var(--muted)}
-    input,textarea{
-      width:100%;
-      padding:12px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:rgba(0,0,0,0.40);
-      color:var(--text);
-      outline:none;
-    }
-    textarea{min-height:120px;resize:vertical}
-    input:focus,textarea:focus{border-color:rgba(255,255,255,0.30)}
-
-    footer{
-      margin:32px 0 12px;
-      text-align:center;
-      font-size:12px;
-      color:var(--muted);
-    }
-
-    /* =========================================================
-       RESPONSIVE (mobile)
-       ========================================================= */
-    @media(max-width:900px){
-      .hero{grid-template-columns:1fr}
-      .col-6,.col-7,.col-5{grid-column:span 12}
-      h1{font-size:36px}
-    }
-  /* =========================================================
-   ACTIVE NAV STATE
-   ========================================================= */
-
-    /* =========================================================
-   SCROLL REVEAL ANIMATION
-   ========================================================= */
-  /* =========================================================
-   CARD HOVER LIFT (DEPTH EFFECT)
-   ========================================================= */
-.card{
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    border-color 0.18s ease;
+.page-header-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
+  background-size:60px 60px;
+  animation:gridShift 25s linear infinite;
 }
-
-.card.reveal.visible:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.85);
-  border-color: rgba(255,255,255,0.22);
+@keyframes gridShift{0%{background-position:0 0,0 0;}100%{background-position:60px 60px,60px 60px;}}
+.page-header-orb{
+  position:absolute;top:-100px;right:-100px;width:500px;height:500px;
+  background:radial-gradient(circle,rgba(232,255,71,0.06) 0%,transparent 70%);
+  border-radius:50%;animation:orbPulse 6s ease-in-out infinite;
 }
+@keyframes orbPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+.page-eyebrow{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:16px;opacity:0;animation:fadeUp 0.7s 0.2s forwards;}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,120px);line-height:0.9;letter-spacing:-1px;opacity:0;animation:fadeUp 0.7s 0.35s forwards;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 
+/* CONTENT */
+.content{padding:80px 48px 100px;max-width:1100px;margin:0 auto;}
 
-.reveal{
-  opacity: 0;
-  transform: translateY(18px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s cubic-bezier(.2,.8,.2,1);
+.section-divider{display:flex;align-items:center;gap:16px;margin-bottom:48px;}
+.section-divider h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,56px);line-height:1;flex-shrink:0;}
+.section-divider-line{height:1px;background:var(--border);flex:1;}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2px;}
+.info-block{
+  padding:48px;background:var(--surface);border:1px solid var(--border);
+  position:relative;overflow:hidden;transition:background 0.3s;
 }
+.info-block:hover{background:var(--surface2);}
+.info-block::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 0.4s cubic-bezier(.2,.8,.2,1);}
+.info-block:hover::after{transform:scaleX(1);}
+.info-block h3{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;margin-bottom:14px;}
+.info-block p{color:var(--muted);line-height:1.8;font-size:15px;}
 
-.reveal.visible{
-  opacity: 1;
-  transform: translateY(0);
+.full-block{
+  padding:48px;background:var(--surface);border:1px solid var(--border);
+  margin-bottom:2px;transition:background 0.3s;
 }
+.full-block:hover{background:var(--surface2);}
+.full-block h3{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;margin-bottom:14px;}
+.full-block p{color:var(--muted);line-height:1.8;font-size:15px;max-width:72ch;}
+.full-block p+p{margin-top:14px;}
 
-.nav .btn.active{
-  background: rgba(255,255,255,0.18);
-  border-color: rgba(255,255,255,0.35);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+/* VALUES */
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:60px;}
+.value-card{
+  border:1px solid var(--border);padding:32px;border-radius:4px;
+  background:var(--surface);transition:all 0.3s;position:relative;overflow:hidden;
 }
+.value-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,255,71,0.04) 0%,transparent 60%);opacity:0;transition:opacity 0.3s;}
+.value-card:hover{transform:translateY(-6px);border-color:var(--border2);box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+.value-card:hover::before{opacity:1;}
+.value-icon{font-size:28px;margin-bottom:16px;display:block;}
+.value-card h3{font-size:17px;font-weight:600;margin-bottom:8px;}
+.value-card p{color:var(--muted);font-size:14px;line-height:1.7;}
 
-  </style>
+/* CTA */
+.cta-section{
+  background:var(--accent);border-radius:8px;padding:72px 64px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:40px;position:relative;overflow:hidden;margin-top:80px;
+}
+.cta-section::before{content:'CRE8';position:absolute;right:-20px;bottom:-40px;font-family:'Bebas Neue',sans-serif;font-size:200px;color:rgba(0,0,0,0.06);line-height:1;pointer-events:none;}
+.cta-section h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,56px);color:#080808;line-height:1;}
+.cta-section p{color:rgba(8,8,8,0.6);font-size:15px;margin-top:10px;max-width:36ch;line-height:1.6;}
+.btn-dark{background:#080808;color:var(--accent);font-weight:700;font-size:14px;padding:16px 32px;border-radius:4px;text-decoration:none;letter-spacing:0.5px;transition:all 0.2s;flex-shrink:0;display:inline-block;}
+.btn-dark:hover{background:#1a1a1a;transform:translateY(-2px);}
+
+footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:0.5px;}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s cubic-bezier(.2,.8,.2,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:0.1s;}
+.reveal-delay-2{transition-delay:0.2s;}
+.reveal-delay-3{transition-delay:0.3s;}
+
+@media(max-width:900px){
+  nav{padding:16px 24px;}
+  .page-header{padding:100px 24px 48px;}
+  .content{padding:48px 24px 60px;}
+  .two-col{grid-template-columns:1fr;}
+  .values-grid{grid-template-columns:1fr 1fr;}
+  .cta-section{padding:48px 32px;flex-direction:column;align-items:flex-start;}
+  footer{flex-direction:column;gap:12px;text-align:center;padding:24px;}
+}
+@media(max-width:600px){
+  .values-grid{grid-template-columns:1fr;}
+  .nav-links .nav-link:not(.nav-cta){display:none;}
+}
+</style>
 </head>
-
 <body>
-<div class="wrap">
 
-  <!-- =========================================================
-       NAVBAR
-       ========================================================= -->
-  <header class="nav">
-  <a class="brand" href="index.html">
-  <div
-  style="
-    width:34px;
-    height:34px;
-    border-radius:10px;
-    overflow:hidden;
-    flex-shrink:0;
-  "
->
-  <img
-    src="logo.png"
-    alt="CRE8 PR logo"
-    style="
-      width:100%;
-      height:100%;
-      display:block;
-    "
-  />
-</div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-
-  <div>
-    <b>CRE8 PR</b>
-    <span>Design · Prototype · Build</span>
+<nav id="nav">
+  <a class="nav-brand" href="index.html">
+    <div class="logo-box">
+      <img src="logo.png" alt="CRE8 PR" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo-fallback" style="display:none">C8</span>
+    </div>
+    CRE8 PR
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="services.html">Services</a>
+    <a class="nav-link active" href="about.html">About</a>
+    <a class="nav-link nav-cta" href="start.html">Start a project</a>
   </div>
-</a>
-
-
-  <nav class="nav-links">
-  <a class="btn" href="index.html">Home</a>
-  <a class="btn" href="services.html">Services</a>
-  <a class="btn active" href="about.html">About</a>
-  <a class="btn" href="start.html">Start a project</a>
 </nav>
 
-</header>
-  <main id="top">
-
-    <!-- =========================================================
-         EDIT: HERO
-         ========================================================= -->
-<section class="card reveal">
-  <h1>About CRE8 PR</h1>
-
-  <p class="lead">
-    CRE8 PR is an engineering design and prototyping studio focused on turning
-    early-stage ideas into real, functional objects.
-  </p>
-
-  <p class="lead">
-    The studio was created to bridge the gap between concepts and manufacturable
-    solutions — combining CAD, rapid prototyping, and hands-on iteration to
-    validate ideas early and efficiently.
-  </p>
-</section>
-
-<section class="grid reveal">
-  <div class="card col-6 reveal">
-    <h3>What we do</h3>
-    <p class="lead">
-      We help individuals, startups, and small teams take ideas from rough
-      sketches to physical prototypes. Our work emphasizes engineering rigor,
-      manufacturability, and real-world constraints.
-    </p>
-  </div>
-
-  <div class="card col-6 reveal">
-    <h3>How we work</h3>
-    <p class="lead">
-      Projects typically move through concept development, CAD design,
-      prototyping, and refinement. Each step is driven by testing and feedback,
-      not assumptions.
-    </p>
-  </div>
-</section>
-
-<section class="card reveal">
-  <h3>Why CRE8 PR</h3>
-  <p class="lead">
-    CRE8 PR was built with a focus on practical engineering and accessibility.
-    By operating from Puerto Rico, we aim to support local innovation while
-    working with clients anywhere.
-  </p>
-
-  <p class="lead">
-    Whether you have a fully formed idea or just a problem to solve, the goal is
-    the same: build something real, test it early, and improve it fast.
-  </p>
-  <p class="lead">
-  The studio’s work includes mechanical prototypes, CAD-driven design studies,
-  and iterative builds developed through hands-on testing and refinement.
-  Each project emphasizes manufacturability and real-world constraints rather
-  than purely conceptual designs.
-  </p>
-
-</section>
-
-    <footer>
-      © <span id="year"></span> CRE8 PR · Puerto Rico
-    </footer>
-
-  </main>
+<div class="page-header">
+  <div class="page-header-grid"></div>
+  <div class="page-header-orb"></div>
+  <p class="page-eyebrow">Who we are</p>
+  <h1 class="page-title">About<br><span style="-webkit-text-stroke:1px rgba(240,237,232,0.3);color:transparent;">CRE8 PR</span></h1>
 </div>
 
+<div class="content">
+
+  <div class="section-divider reveal">
+    <h2>The Studio</h2>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="full-block reveal">
+    <p>CRE8 PR is an engineering design and prototyping studio focused on turning early-stage ideas into real, functional objects. The studio was created to bridge the gap between concepts and manufacturable solutions — combining CAD, rapid prototyping, and hands-on iteration to validate ideas early and efficiently.</p>
+    <p>By operating from Puerto Rico, we aim to support local innovation while working with clients anywhere. Whether you have a fully formed idea or just a problem to solve, the goal is the same: build something real, test it early, and improve it fast.</p>
+  </div>
+
+  <div class="two-col" style="margin-top:2px">
+    <div class="info-block reveal">
+      <h3>What We Do</h3>
+      <p>We help individuals, startups, and small teams take ideas from rough sketches to physical prototypes. Our work emphasizes engineering rigor, manufacturability, and real-world constraints — not just what looks good on screen.</p>
+    </div>
+    <div class="info-block reveal reveal-delay-1">
+      <h3>How We Work</h3>
+      <p>Projects move through concept development, CAD design, prototyping, and refinement. Each step is driven by testing and feedback, not assumptions. We break things on purpose so you don't have to later.</p>
+    </div>
+  </div>
+
+  <div class="section-divider reveal" style="margin-top:80px">
+    <h2>What We Stand For</h2>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="values-grid">
+    <div class="value-card reveal">
+      <span class="value-icon">⚙️</span>
+      <h3>Engineering First</h3>
+      <p>Every design decision is grounded in what can actually be built, manufactured, and used in the real world.</p>
+    </div>
+    <div class="value-card reveal reveal-delay-1">
+      <span class="value-icon">🔁</span>
+      <h3>Iterate Fast</h3>
+      <p>We believe in building early and often. Physical feedback beats assumptions every time.</p>
+    </div>
+    <div class="value-card reveal reveal-delay-2">
+      <span class="value-icon">🇵🇷</span>
+      <h3>Puerto Rico Rooted</h3>
+      <p>Built in PR, accessible everywhere. We're here to grow local innovation and prove it can compete globally.</p>
+    </div>
+  </div>
+
+  <div class="cta-section reveal">
+    <div>
+      <h2>Ready to build<br>something real?</h2>
+      <p>Tell us what you're working on. We'll take it from idea to prototype.</p>
+    </div>
+    <a class="btn-dark" href="start.html">Start a project →</a>
+  </div>
+
+</div>
+
+<footer>
+  <span>© <span id="year"></span> CRE8 PR · Puerto Rico</span>
+  <span>Design · Prototype · Build</span>
+</footer>
+
 <script>
-  /* =========================================================
-     EDIT: CONTACT EMAIL (matches the visible link above)
-     ========================================================= */
-  const CONTACT_TO = "hello@cre8pr.com";
-
-  /* This makes the footer year always correct */
-  document.getElementById("year").textContent = new Date().getFullYear();
-  /* =========================================================
-   SCROLL REVEAL OBSERVER
-   ========================================================= */
-const revealElements = document.querySelectorAll(".reveal");
-
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add("visible");
-      }
-    });
-  },
-  { threshold: 0.15 }
-);
-
-revealElements.forEach(el => revealObserver.observe(el));
-
+document.getElementById('year').textContent = new Date().getFullYear();
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=(mx-5)+'px';cursor.style.top=(my-5)+'px';});
+(function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=(rx-18)+'px';ring.style.top=(ry-18)+'px';requestAnimationFrame(animRing);})();
+document.querySelectorAll('a,button,.value-card,.info-block').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.transform='scale(2.5)';ring.style.transform='scale(1.5)';ring.style.opacity='0.8';});
+  el.addEventListener('mouseleave',()=>{cursor.style.transform='scale(1)';ring.style.transform='scale(1)';ring.style.opacity='0.5';});
+});
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);});
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 </script>
-
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
