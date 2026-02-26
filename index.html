@@ -1,714 +1,449 @@
-<!--
- CRE8 PR — Single-file website (index.html)
- ------------------------------------------------------------
- HOW TO USE
- 1) Copy this entire file into a new file named: index.html
- 2) Put your images in the SAME folder as index.html (or adjust paths)
- 3) Open index.html in your browser
-
- WHAT TO EDIT (easy)
- - Title (browser tab):      SEARCH "EDIT: PAGE TITLE"
- - Social preview text:       SEARCH "EDIT: META DESCRIPTION"
- - Brand name in navbar:      SEARCH "EDIT: BRAND NAME"
- - Colors + background:       SEARCH "EDIT: THEME COLORS"
- - Hero text:                 SEARCH "EDIT: HERO"
- - Services text/images:      SEARCH "EDIT: SERVICES"
- - Contact email:             SEARCH "EDIT: CONTACT EMAIL"
- - Footer text/year:          SEARCH "EDIT: FOOTER"
-
- TIP: Press Ctrl+F (or Cmd+F) and search for "EDIT:" to jump around.
--->
-
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<!-- =========================================================
-      EDIT: PAGE TITLE (shows on browser tab)
-      ========================================================= -->
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>CRE8 PR — Design & Prototyping Studio</title>
-
-<!-- =========================================================
-      EDIT: META DESCRIPTION (shows in Google previews + sharing)
-      Keep it 1–2 sentences.
-      ========================================================= -->
-<meta
-name="description"
-content="CRE8 PR is an engineering design and prototyping studio turning ideas into real, manufacturable objects through CAD and rapid iteration."
-/>
-
+<meta name="description" content="CRE8 PR is an engineering design and prototyping studio turning ideas into real, manufacturable objects through CAD and rapid iteration."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* =========================================================
-      EDIT: THEME COLORS (this is the easiest place to change vibe)
-      ---------------------------------------------------------
-      - Background:     --bg
-      - Text color:     --text
-      - Muted text:     --muted
-      - Borders:        --border
-      - Card background --panel
-      - Grid lines:     --grid
-      ========================================================= */
 :root{
---bg:#070707;                 /* main page background */
---panel:rgba(0,0,0,0.45);     /* card background */
---panelStrong:rgba(0,0,0,0.60);/* nav background */
---text:rgba(255,255,255,0.92);/* main text */
---muted:rgba(255,255,255,0.65);/* smaller text */
---border:rgba(255,255,255,0.14);/* border lines */
---grid:rgba(255,255,255,0.05); /* background grid lines */
---shadow:0 14px 40px rgba(0,0,0,0.70);
---radius:18px;
+  --bg:#080808;
+  --surface:rgba(255,255,255,0.03);
+  --surface2:rgba(255,255,255,0.06);
+  --text:#f0ede8;
+  --muted:rgba(240,237,232,0.5);
+  --accent:#e8ff47;
+  --border:rgba(255,255,255,0.08);
+  --border2:rgba(255,255,255,0.14);
 }
-
-/* Basic resets */
-*{box-sizing:border-box}
-html,body{height:100%}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
-margin:0;
-font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-color:var(--text);
-
-background:
-linear-gradient(var(--grid) 1px, transparent 1px),
-linear-gradient(90deg, var(--grid) 1px, transparent 1px),
-var(--bg);
-background-size: 42px 42px;
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  cursor:none;
 }
-
-a{color:inherit;text-decoration:none}
- /* =========================================================
-   HARD LINK RESET (fix Safari purple underline in brand)
-   ========================================================= */
-a,
-a:visited,
-a:hover,
-a:active,
-a:focus{
-  color: var(--text);
-  text-decoration: none !important;
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
+.cursor{
+  position:fixed;width:10px;height:10px;
+  background:var(--accent);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transition:transform 0.1s ease;
+  mix-blend-mode:difference;
 }
-
-/* Specifically kill underline inside brand */
-.brand,
-.brand *{
-  text-decoration: none !important;
-  color: var(--text);
+.cursor-ring{
+  position:fixed;width:36px;height:36px;
+  border:1px solid var(--accent);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transition:all 0.18s ease;opacity:0.5;
 }
-
-.wrap{max-width:1100px;margin:auto;padding:24px}
-
-/* =========================================================
-      NAVBAR
-      ========================================================= */
-.nav{
-display:flex;align-items:center;justify-content:space-between;
-gap:16px;
-padding:14px 18px;
-border:1px solid var(--border);
-background:var(--panelStrong);
-border-radius:999px;
-box-shadow:var(--shadow);
-position:sticky;top:16px;z-index:10;
-backdrop-filter:blur(10px);
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 48px;
+  background:rgba(8,8,8,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:padding 0.3s ease;
 }
-
-/* =========================================================
-   MOBILE NAV FIX (CORRECT LOCATION)
-   ========================================================= */
-.nav-links{
-  display:flex;
-  gap:8px;
-  align-items:center;
+nav.scrolled{padding:14px 48px;}
+.nav-brand{
+  display:flex;align-items:center;gap:12px;
+  font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;
+  color:var(--text);text-decoration:none;
 }
-
-@media (max-width: 720px){
-  .nav{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:12px;
-    border-radius:18px; /* kills giant pill */
-  }
-
-  .nav-links{
-    width:100%;
-    flex-wrap:wrap;
-  }
-
-  .nav-links .btn{
-    flex:1 1 auto;
-    text-align:center;
-  }
+.logo-box{
+  width:36px;height:36px;background:var(--accent);
+  border-radius:8px;display:grid;place-items:center;overflow:hidden;
 }
-
-
-.brand{display:flex;align-items:center;gap:12px}
-.brand b{
- font-size:16px;
- letter-spacing:0.4px;
- color: var(--text);
+.logo-box img{width:100%;height:100%;object-fit:cover;display:block;}
+.logo-fallback{font-family:'Bebas Neue',sans-serif;font-size:14px;color:#080808;letter-spacing:1px;}
+.nav-links{display:flex;gap:4px;align-items:center;}
+.nav-link{
+  font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);
+  text-decoration:none;padding:8px 16px;border-radius:4px;
+  transition:all 0.2s;letter-spacing:0.5px;
 }
-.brand span{display:block;font-size:12px;color:var(--muted)}
+.nav-link:hover,.nav-link.active{color:var(--text);background:var(--surface2);}
+.nav-cta{background:var(--accent);color:#080808 !important;font-weight:600;border-radius:4px;}
+.nav-cta:hover{background:#d4eb3a;transform:translateY(-1px);}
 
-/* Buttons */
-.btn{
-border:1px solid var(--border);
-background:rgba(255,255,255,0.08);
-padding:10px 14px;
-border-radius:999px;
-font-weight:600;
-font-size:14px;
-cursor:pointer;
-transition: background .12s ease, transform .12s ease;
-display:inline-flex;
-align-items:center;
-justify-content:center;
-text-decoration: none;
-color: var(--text);
-}
-.btn:hover{background:rgba(255,255,255,0.14); transform: translateY(-1px);}
-
-/* =========================================================
-      HERO (top section)
-      ========================================================= */
+/* HERO */
 .hero{
-margin-top:28px;
-display:grid;
-grid-template-columns:1.2fr 0.8fr;
-gap:20px;
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 48px 80px;position:relative;overflow:hidden;
 }
-.card{
-border:1px solid var(--border);
-background:var(--panel);
-border-radius:var(--radius);
-padding:26px;
-box-shadow:var(--shadow);
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
+  background-size:60px 60px;
+  animation:gridShift 25s linear infinite;
+}
+@keyframes gridShift{0%{background-position:0 0,0 0;}100%{background-position:60px 60px,60px 60px;}}
+.hero-orb{
+  position:absolute;top:-200px;right:-100px;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(232,255,71,0.08) 0%,transparent 70%);
+  border-radius:50%;animation:orbPulse 6s ease-in-out infinite;
+}
+.hero-orb2{
+  position:absolute;bottom:-300px;left:-100px;
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(255,107,53,0.05) 0%,transparent 70%);
+  border-radius:50%;animation:orbPulse 8s ease-in-out infinite reverse;
+}
+@keyframes orbPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+.hero-eyebrow{
+  font-family:'DM Mono',monospace;font-size:12px;
+  letter-spacing:3px;color:var(--accent);text-transform:uppercase;
+  margin-bottom:24px;opacity:0;animation:fadeUp 0.8s 0.2s forwards;
+}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(72px,12vw,180px);
+  line-height:0.9;letter-spacing:-1px;margin-bottom:40px;
+  opacity:0;animation:fadeUp 0.8s 0.4s forwards;
+}
+.hero-title .accent{color:var(--accent);}
+.hero-title .stroke{-webkit-text-stroke:1px rgba(240,237,232,0.3);color:transparent;}
+.hero-bottom{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:32px;
+  opacity:0;animation:fadeUp 0.8s 0.6s forwards;
+}
+.hero-desc{max-width:480px;font-size:16px;line-height:1.7;color:var(--muted);font-weight:300;}
+.hero-desc strong{color:var(--text);font-weight:500;}
+.hero-actions{display:flex;gap:12px;flex-shrink:0;}
+.btn-primary{
+  background:var(--accent);color:#080808;font-weight:700;font-size:14px;
+  padding:14px 28px;border-radius:4px;text-decoration:none;letter-spacing:0.5px;
+  transition:all 0.2s;display:inline-block;
+}
+.btn-primary:hover{background:#d4eb3a;transform:translateY(-2px);box-shadow:0 8px 30px rgba(232,255,71,0.3);}
+.btn-ghost{
+  border:1px solid var(--border2);color:var(--text);font-weight:500;font-size:14px;
+  padding:14px 28px;border-radius:4px;text-decoration:none;letter-spacing:0.5px;
+  transition:all 0.2s;display:inline-block;
+}
+.btn-ghost:hover{border-color:var(--text);background:var(--surface2);}
+
+/* MARQUEE */
+.marquee-wrap{
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:14px 0;overflow:hidden;background:var(--surface);
+}
+.marquee-track{display:flex;animation:marquee 22s linear infinite;white-space:nowrap;}
+.marquee-item{
+  font-family:'Bebas Neue',sans-serif;font-size:14px;
+  letter-spacing:3px;color:var(--muted);
+  padding:0 40px;display:flex;align-items:center;gap:40px;flex-shrink:0;
+}
+.dot{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}
 }
 
-h1{
-margin:0 0 12px;
-font-size:44px;
-letter-spacing:-0.6px;
-line-height:1.05;
+/* SECTIONS */
+.section{padding:100px 48px;position:relative;z-index:2;}
+.section-divider{display:flex;align-items:center;gap:16px;margin-bottom:60px;}
+.section-divider h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);line-height:1;flex-shrink:0;}
+.section-divider-line{height:1px;background:var(--border);flex:1;}
+
+/* PROCESS */
+.process-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;border:1px solid var(--border);}
+.process-item{
+  padding:48px;background:var(--surface);
+  border:1px solid var(--border);position:relative;overflow:hidden;transition:background 0.3s;
 }
-.lead{
-color:var(--muted);
-max-width:62ch;
-line-height:1.5;
+.process-item::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--accent);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s cubic-bezier(.2,.8,.2,1);
+}
+.process-item:hover{background:var(--surface2);}
+.process-item:hover::after{transform:scaleX(1);}
+.process-num{
+  font-family:'Bebas Neue',sans-serif;font-size:80px;line-height:1;
+  color:rgba(255,255,255,0.04);position:absolute;top:24px;right:24px;
+}
+.process-item h3{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;margin-bottom:12px;}
+.process-item p{color:var(--muted);line-height:1.7;font-size:15px;max-width:36ch;}
+.process-tag{
+  display:inline-block;font-family:'DM Mono',monospace;font-size:11px;
+  color:var(--accent);border:1px solid rgba(232,255,71,0.3);
+  padding:4px 10px;border-radius:2px;margin-bottom:20px;letter-spacing:1px;
 }
 
-/* =========================================================
-      LAYOUT GRID HELPERS
-      ========================================================= */
-section{margin-top:32px}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-.col-12{grid-column:span 12}
-.col-6{grid-column:span 6}
-.col-7{grid-column:span 7}
-.col-5{grid-column:span 5}
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:0;}
+.service-card{
+  border:1px solid var(--border);padding:32px 28px;border-radius:4px;
+  background:var(--surface);position:relative;overflow:hidden;transition:all 0.3s;
+}
+.service-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(232,255,71,0.04) 0%,transparent 60%);
+  opacity:0;transition:opacity 0.3s;
+}
+.service-card:hover{transform:translateY(-6px);border-color:var(--border2);box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+.service-card:hover::before{opacity:1;}
+.service-icon{font-size:32px;margin-bottom:20px;display:block;}
+.service-card h3{font-size:18px;font-weight:600;margin-bottom:10px;}
+.service-card p{color:var(--muted);font-size:14px;line-height:1.7;}
 
-/* =========================================================
-      HOW IT WORKS (steps)
-      ========================================================= */
-.step{
-display:flex;gap:12px;
-padding:14px;
-border-radius:14px;
-border:1px solid var(--border);
-background:rgba(0,0,0,0.30);
-margin-bottom:10px;
-}
-.num{
-width:28px;height:28px;
-border-radius:10px;
-display:grid;place-items:center;
-border:1px solid var(--border);
-font-weight:700;
-flex:0 0 auto;
-}
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.stat{background:var(--bg);padding:48px;text-align:center;transition:background 0.2s;}
+.stat:hover{background:var(--surface);}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:1;color:var(--accent);display:block;}
+.stat-label{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;color:var(--muted);margin-top:8px;}
 
-/* =========================================================
-      SERVICES (image cards)
-      ========================================================= */
-.serviceCard img{
-width:100%;
-border-radius:12px;
-display:block;
+/* CTA */
+.cta-section{
+  margin:0 48px 100px;background:var(--accent);border-radius:8px;
+  padding:80px;display:flex;align-items:center;justify-content:space-between;
+  gap:40px;position:relative;overflow:hidden;
 }
-.serviceCard h3{
-margin:12px 0 6px;
-font-size:16px;
-letter-spacing:0.2px;
+.cta-section::before{
+  content:'CRE8';position:absolute;right:-20px;bottom:-40px;
+  font-family:'Bebas Neue',sans-serif;font-size:200px;color:rgba(0,0,0,0.06);
+  line-height:1;pointer-events:none;
 }
-.serviceCard p{margin:0;color:var(--muted);line-height:1.5}
-
-/* =========================================================
-      FORM
-      ========================================================= */
-form{display:grid;gap:10px}
-label{font-size:12px;color:var(--muted)}
-input,textarea{
-width:100%;
-padding:12px;
-border-radius:14px;
-border:1px solid var(--border);
-background:rgba(0,0,0,0.40);
-color:var(--text);
-outline:none;
+.cta-section h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);color:#080808;line-height:1;}
+.cta-section p{color:rgba(8,8,8,0.6);font-size:16px;margin-top:12px;max-width:40ch;line-height:1.6;}
+.btn-dark{
+  background:#080808;color:var(--accent);font-weight:700;font-size:14px;
+  padding:16px 32px;border-radius:4px;text-decoration:none;letter-spacing:0.5px;
+  transition:all 0.2s;flex-shrink:0;display:inline-block;
 }
-textarea{min-height:120px;resize:vertical}
-input:focus,textarea:focus{border-color:rgba(255,255,255,0.30)}
+.btn-dark:hover{background:#1a1a1a;transform:translateY(-2px);}
 
 footer{
-margin:32px 0 12px;
-text-align:center;
-font-size:12px;
-color:var(--muted);
+  border-top:1px solid var(--border);padding:32px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:0.5px;
 }
 
-/* =========================================================
-      RESPONSIVE (mobile)
-      ========================================================= */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s cubic-bezier(.2,.8,.2,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:0.1s;}
+.reveal-delay-2{transition-delay:0.2s;}
+.reveal-delay-3{transition-delay:0.3s;}
+
 @media(max-width:900px){
-.hero{grid-template-columns:1fr}
-.col-6,.col-7,.col-5{grid-column:span 12}
-h1{font-size:36px}
+  nav{padding:16px 24px;}
+  .hero{padding:0 24px 60px;}
+  .hero-bottom{flex-direction:column;align-items:flex-start;}
+  .section{padding:60px 24px;}
+  .process-grid{grid-template-columns:1fr;}
+  .services-grid{grid-template-columns:1fr 1fr;}
+  .stats-row{grid-template-columns:1fr;}
+  .cta-section{margin:0 24px 60px;padding:48px 32px;flex-direction:column;align-items:flex-start;}
+  footer{flex-direction:column;gap:12px;text-align:center;padding:24px;}
 }
-/* =========================================================
-   SCROLL REVEAL ANIMATION
-   ========================================================= */
-.reveal{
-  opacity: 0;
-  transform: translateY(18px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s cubic-bezier(.2,.8,.2,1);
+@media(max-width:600px){
+  .services-grid{grid-template-columns:1fr;}
+  .hero-title{font-size:64px;}
+  .nav-links .nav-link:not(.nav-cta){display:none;}
 }
-
-.reveal.visible{
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* =========================================================
-   MICRO-INTERACTIONS & DEPTH
-   ========================================================= */
-
-/* Card hover lift */
-.card{
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    border-color 0.18s ease;
-}
-
-.card:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.85);
-  border-color: rgba(255,255,255,0.22);
-}
-
-/* Image subtle zoom */
-.card img{
-  transition: transform 0.25s ease;
-}
-
-.card:hover img{
-  transform: scale(1.035);
-}
-
-/* Button press feel */
-.btn{
-  transition:
-    background 0.12s ease,
-    transform 0.12s ease,
-    box-shadow 0.12s ease;
-}
-
-.btn:active{
-  transform: translateY(1px);
-}
-
-/* =========================================================
-   ACTIVE NAV STATE
-   ========================================================= */
-.nav .btn.active{
-  background: rgba(255,255,255,0.18);
-  border-color: rgba(255,255,255,0.35);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
-}
-
- /* =========================================================
-   HERO ENTRANCE ANIMATION
-   ========================================================= */
-.hero .card{
-  opacity: 0;
-  transform: translateY(18px);
-  animation: heroIn 0.7s cubic-bezier(.2,.8,.2,1) forwards;
-}
-
-.hero .card:nth-child(1){
-  animation-delay: 0.05s;
-}
-
-.hero .card:nth-child(2){
-  animation-delay: 0.15s;
-}
-
-@keyframes heroIn{
-  to{
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 </style>
 </head>
-
 <body>
-<div class="wrap">
 
-<!-- =========================================================
-      NAVBAR
-      ========================================================= -->
-<header class="nav">
-  <a class="brand" href="index.html">
-  <div
-  style="
-    width:34px;
-    height:34px;
-    border-radius:10px;
-    overflow:hidden;
-    flex-shrink:0;
-  "
->
-  <img
-    src="logo.png"
-    alt="CRE8 PR logo"
-    style="
-      width:100%;
-      height:100%;
-      display:block;
-    "
-  />
-</div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-
-  <div>
-    <b>CRE8 PR</b>
-    <span>Design · Prototype · Build</span>
+<nav id="nav">
+  <a class="nav-brand" href="index.html">
+    <div class="logo-box">
+      <img src="logo.png" alt="CRE8 PR" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo-fallback" style="display:none">C8</span>
+    </div>
+    CRE8 PR
+  </a>
+  <div class="nav-links">
+    <a class="nav-link active" href="index.html">Home</a>
+    <a class="nav-link" href="services.html">Services</a>
+    <a class="nav-link" href="about.html">About</a>
+    <a class="nav-link nav-cta" href="start.html">Start a project</a>
   </div>
-</a>
-
-
-  <nav class="nav-links">
-  <a class="btn active" href="index.html">Home</a>
-  <a class="btn" href="services.html">Services</a>
-  <a class="btn" href="about.html">About</a>
-  <a class="btn" href="start.html">Start a project</a>
 </nav>
 
-</header>
-
-<main id="top">
-
-<!-- =========================================================
-        EDIT: HERO
-        ========================================================= -->
 <section class="hero">
-<div class="card">
-<!-- EDIT: main headline -->
-<h1>Bridging the gap between your innovative ideas and reality.</h1>
-
-<!-- EDIT: hero paragraph -->
-<p class="lead">
-CRE8 PR is an engineering design and prototyping studio.
-We turn ideas and problems into functional, manufacturable solutions
-through CAD, rapid prototyping, and iteration.
-</p>
-
-<!-- OPTIONAL: add another button/link here if you want -->
-<!-- <div style="margin-top:16px"><a class="btn" href="#services">See services</a></div> -->
-</div>
-
-<div class="card">
-<!-- EDIT: right-side highlights -->
-<p><b>Prototype-first</b></p>
-<p class="lead">Fast feedback. Physical results.</p>
-
-<p style="margin-top:16px"><b>Engineering-driven</b></p>
-<p class="lead">Designs that can actually be built.</p>
-
-<p style="margin-top:16px"><b>Puerto Rico focus</b></p>
-<p class="lead">Built with PR clients and shipping in mind.</p>
-</div>
-</section>
-
-<!-- =========================================================
-        HOW IT WORKS
-        ========================================================= -->
-<section id="how" class="grid">
-<div class="card reveal col-12">
-<h2 style="margin:0">How it works</h2>
-<p class="lead" style="margin:10px 0 0">
-Simple process: submit problem or solution idea → CAD → prototype → iterate → build.
-</p>
-</div>
-
-<div class="card reveal col-7">
-<!-- EDIT: steps text -->
-<div class="step">
-<div class="num">1</div>
-<div>
-<b>Submit an idea or problem</b><br />
-<span class="lead">Describe what you want solved and what success looks like.</span>
-</div>
-</div>
-
-<div class="step">
-<div class="num">2</div>
-<div>
-<b>CAD + prototype</b><br />
-<span class="lead">We design the solution and produce a real prototype.</span>
-</div>
-</div>
-
-<div class="step">
-<div class="num">3</div>
-<div>
-<b>Iterate</b><br />
-<span class="lead">Refine until it works and feels right.</span>
-</div>
-</div>
-
-<div class="step" style="margin-bottom:0">
-<div class="num">4</div>
-<div>
-<b>Build</b><br />
-<span class="lead">Small-batch manufacturing or handoff to a production partner.</span>
-</div>
-</div>
-</div>
-
-<div class="card reveal col-5">
-<!-- EDIT: side description -->
-<h3 style="margin:0 0 10px">Deliverables</h3>
-<p class="lead" style="margin:0">
-Depending on the project: CAD files, prototype(s), drawings, and a clean revision path.
-</p>
-</div>
-</section>
-<!-- =========================================================
-     NEW: PROJECT TIMELINE
-     ========================================================= -->
-<section class="grid">
-  <div class="card reveal col-12">
-    <h2 style="margin:0">Typical project timeline</h2>
-    <p class="lead" style="margin:10px 0 18px">
-      Timelines vary by complexity, but most projects follow this general flow.
+  <div class="hero-grid"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-orb2"></div>
+  <p class="hero-eyebrow">Puerto Rico · Engineering Design Studio</p>
+  <h1 class="hero-title">
+    IDEAS<br>
+    <span class="stroke">BECOME</span><br>
+    <span class="accent">REAL.</span>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      CRE8 PR turns problems and concepts into <strong>functional, manufacturable solutions</strong>
+      through CAD, rapid prototyping, and relentless iteration.
     </p>
-
-    <div class="step">
-      <div class="num">1</div>
-      <div>
-        <b>Concept & constraints</b><br />
-        <span class="lead">~1 week · define requirements, use cases, and success criteria.</span>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="num">2</div>
-      <div>
-        <b>CAD & initial prototype</b><br />
-        <span class="lead">~1–2 weeks · design, model, and fabricate first prototype.</span>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="num">3</div>
-      <div>
-        <b>Iteration & refinement</b><br />
-        <span class="lead">~1–3 weeks · test, revise, and improve performance or fit.</span>
-      </div>
-    </div>
-
-    <div class="step" style="margin-bottom:0">
-      <div class="num">4</div>
-      <div>
-        <b>Build or handoff</b><br />
-        <span class="lead">Final prototype, small batch build, or manufacturing-ready files.</span>
-      </div>
+    <div class="hero-actions">
+      <a class="btn-primary" href="start.html">Start a project</a>
+      <a class="btn-ghost" href="services.html">Our services</a>
     </div>
   </div>
 </section>
 
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="dot"></span>CAD DESIGN<span class="dot"></span>RAPID PROTOTYPING<span class="dot"></span>3D PRINTING<span class="dot"></span>SMALL BATCH MANUFACTURING<span class="dot"></span>ENGINEERING CONSULTATION<span class="dot"></span>PRODUCT ITERATION<span class="dot"></span>PUERTO RICO</div>
+    <div class="marquee-item"><span class="dot"></span>CAD DESIGN<span class="dot"></span>RAPID PROTOTYPING<span class="dot"></span>3D PRINTING<span class="dot"></span>SMALL BATCH MANUFACTURING<span class="dot"></span>ENGINEERING CONSULTATION<span class="dot"></span>PRODUCT ITERATION<span class="dot"></span>PUERTO RICO</div>
+  </div>
+</div>
 
-<!-- =========================================================
-        EDIT: SERVICES
-        ========================================================= -->
-<section id="services">
-  <div class="card reveal" style="
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:24px;
-  ">
+<section class="section">
+  <div class="section-divider reveal">
+    <h2>How It Works</h2>
+    <div class="section-divider-line"></div>
+  </div>
+  <div class="process-grid">
+    <div class="process-item reveal">
+      <div class="process-num">01</div>
+      <span class="process-tag">WEEK 1</span>
+      <h3>Define the Problem</h3>
+      <p>Submit an idea or problem. We dig into constraints, use cases, and what "done" actually looks like.</p>
+    </div>
+    <div class="process-item reveal reveal-delay-1">
+      <div class="process-num">02</div>
+      <span class="process-tag">WEEK 1–2</span>
+      <h3>CAD + Prototype</h3>
+      <p>We design the solution and put something physical in your hands fast. Real feedback, real fast.</p>
+    </div>
+    <div class="process-item reveal reveal-delay-2">
+      <div class="process-num">03</div>
+      <span class="process-tag">WEEK 2–5</span>
+      <h3>Iterate</h3>
+      <p>Refine until it works and feels right. We test, break things on purpose, and improve.</p>
+    </div>
+    <div class="process-item reveal reveal-delay-3">
+      <div class="process-num">04</div>
+      <span class="process-tag">FINAL</span>
+      <h3>Build</h3>
+      <p>Small-batch manufacturing, handoff to a production partner, or manufacturing-ready files.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="section-divider reveal">
+    <h2>Services</h2>
+    <div class="section-divider-line"></div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-icon">✏️</span>
+      <h3>Idea Definition</h3>
+      <p>We clarify constraints, success criteria, and context so the build has a real target.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-icon">🖥️</span>
+      <h3>CAD Design</h3>
+      <p>Parametric, manufacturable CAD models designed for real-world use and production.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-icon">🖨️</span>
+      <h3>Prototyping</h3>
+      <p>3D printing and fabrication for fit, form, and function testing with fast turnaround.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <span class="service-icon">🔧</span>
+      <h3>Small-Batch Builds</h3>
+      <p>Once validated, we produce short runs or transition the design to a manufacturer.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;padding-bottom:0">
+  <div class="stats-row">
+    <div class="stat reveal">
+      <span class="stat-num" data-target="14">0</span>
+      <div class="stat-label">Days avg. first prototype</div>
+    </div>
+    <div class="stat reveal reveal-delay-1">
+      <span class="stat-num" data-target="100">0</span>
+      <div class="stat-label">% Puerto Rico focused</div>
+    </div>
+    <div class="stat reveal reveal-delay-2">
+      <span class="stat-num" data-target="4">0</span>
+      <div class="stat-label">Step process · no fluff</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="cta-section reveal">
     <div>
-      <h2 style="margin:0">Services</h2>
-      <p class="lead" style="margin:10px 0 0">
-        End-to-end engineering design, CAD, prototyping, and small-batch manufacturing.
-      </p>
+      <h2>Have a project<br>in mind?</h2>
+      <p>Tell us what you're building. We'll take it from idea to a real, manufacturable object.</p>
     </div>
-
-    <a class="btn" href="services.html" style="flex-shrink:0">
-      View services →
-    </a>
+    <a class="btn-dark" href="start.html">Start a project →</a>
   </div>
 </section>
 
-<section class="grid">
-
-<div class="card reveal col-6 serviceCard">
-<img src="sketch.png" alt="Idea submission / concept stage">
-<h3>1. Idea definition</h3>
-<p>We clarify constraints, success criteria, and context so the build has a real target.</p>
-</div>
-
-<div class="card reveal col-6 serviceCard">
-<img src="cad.png" alt="CAD design">
-<h3>2. CAD design</h3>
-<p>Parametric, manufacturable CAD models designed for real-world use.</p>
-</div>
-
-<div class="card reveal col-6 serviceCard">
-<img src="3dprint.png" alt="Prototype">
-<h3>3. Prototyping</h3>
-<p>3D printing / fabrication for fit + function testing and fast iteration.</p>
-</div>
-
-<div class="card reveal col-6 serviceCard">
-<img src="actual.png" alt="Manufacturable design">
-<h3>4. Small-batch builds</h3>
-<p>Once validated, we produce short runs or transition the design to a manufacturer.</p>
-</div>
-</section>
-
-<!-- =========================================================
-     NEW: FEATURED PROJECT
-     ========================================================= -->
-<section class="grid">
-  <div class="card reveal col-12">
-    <h2 style="margin:0">Featured project</h2>
-    <p class="lead" style="margin:10px 0 0">
-      Example of a recent design-to-prototype workflow.
-    </p>
-  </div>
-
-  <div class="card reveal col-7">
-    <h3 style="margin-top:0">Mechanical prototype development</h3>
-    <p class="lead">
-      This project involved taking a rough concept and developing it into a
-      functional mechanical prototype through CAD, fabrication, and iteration.
-    </p>
-
-    <ul class="lead">
-      <li>Defined constraints and functional requirements</li>
-      <li>Created parametric CAD models and assemblies</li>
-      <li>Produced multiple physical prototypes for testing</li>
-      <li>Refined geometry based on real-world performance</li>
-    </ul>
-
-    <p class="lead">
-      Final deliverables included CAD files, a validated prototype, and a clear
-      path toward small-batch manufacturing.
-    </p>
-  </div>
-
-  <div class="card reveal col-5 serviceCard">
-    <img src="non.png" alt="Example project prototype">
-    <p class="lead" style="margin-top:12px">
-      Concept → CAD → prototype → refined build
-    </p>
-  </div>
-</section>
-
- <!-- =========================================================
-        CALL TO ACTION
-        ========================================================= -->
-<section class="grid">
-  <div class="card reveal col-12" style="text-align:center">
-    <h2 style="margin:0">Have a project in mind?</h2>
-    <p class="lead" style="margin:12px auto; max-width:60ch">
-      Tell us what you’re trying to build and we’ll help you take it
-      from idea to a real, manufacturable object.
-    </p>
-    <a class="btn" href="start.html" style="margin-top:12px">
-      Start a project
-    </a>
-  </div>
-</section>
-
-<!-- =========================================================
-        EDIT: FOOTER
-        ========================================================= -->
 <footer>
-© <span id="year"></span> CRE8 PR · Puerto Rico
+  <span>© <span id="year"></span> CRE8 PR · Puerto Rico</span>
+  <span>Design · Prototype · Build</span>
 </footer>
-</main>
-</div>
 
 <script>
-  /* Footer year */
-  document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById('year').textContent = new Date().getFullYear();
 
-  /* =========================================================
-     SCROLL REVEAL OBSERVER
-     ========================================================= */
-  const revealElements = document.querySelectorAll(".reveal");
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=(mx-5)+'px';
+  cursor.style.top=(my-5)+'px';
+});
+(function animRing(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  ring.style.left=(rx-18)+'px'; ring.style.top=(ry-18)+'px';
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,button,.service-card,.process-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ cursor.style.transform='scale(2.5)'; ring.style.transform='scale(1.5)'; ring.style.opacity='0.8'; });
+  el.addEventListener('mouseleave',()=>{ cursor.style.transform='scale(1)'; ring.style.transform='scale(1)'; ring.style.opacity='0.5'; });
+});
 
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add("visible");
-        }
-      });
-    },
-    {
-      threshold: 0.15
+// Nav scroll
+window.addEventListener('scroll',()=>{ document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60); });
+
+// Reveal + counter
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      const num = e.target.querySelector('[data-target]');
+      if(num && !num.dataset.animated){
+        num.dataset.animated=true;
+        const target=parseInt(num.dataset.target);
+        let count=0;
+        const step=Math.max(1,Math.ceil(target/40));
+        const suffix = target===100?'%':'+';
+        const t=setInterval(()=>{
+          count=Math.min(count+step,target);
+          num.textContent=count+suffix;
+          if(count>=target) clearInterval(t);
+        },30);
+      }
     }
-  );
-
-  revealElements.forEach(el => revealObserver.observe(el));
+  });
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 </script>
-
-
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
