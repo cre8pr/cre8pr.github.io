@@ -181,248 +181,234 @@
 </footer>
 
 <script src="shared.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js"></script>
-<script>
-(function(){
-  /* ---------- SCENE SETUP ---------- */
-  const canvas = document.getElementById('canvas3d');
-  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, preserveDrawingBuffer:true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x080808);
-
-  const scene = new THREE.Scene();
-
-  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 200);
-  camera.position.set(6, 5, 8);
-
-  const controls = new THREE.OrbitControls(camera, canvas);
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.08;
-  controls.target.set(0, 0.5, 0);
-
-  /* ---------- LIGHTS ---------- */
-  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-  const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-  dirLight.position.set(5, 10, 7);
-  scene.add(dirLight);
-  const fillLight = new THREE.DirectionalLight(0xffffff, 0.3);
-  fillLight.position.set(-5, 3, -5);
-  scene.add(fillLight);
-
-  /* ---------- GRID ---------- */
-  const grid = new THREE.GridHelper(20, 40, 0x222222, 0x151515);
-  scene.add(grid);
-
-  /* ---------- STATE ---------- */
-  const objects = [];
-  let selected = null;
-  let isDragging = false;
-  let dragPlane = new THREE.Plane(new THREE.Vector3(0,1,0), 0);
-  let dragOffset = new THREE.Vector3();
-  const raycaster = new THREE.Raycaster();
-  const mouse = new THREE.Vector2();
-  const intersection = new THREE.Vector3();
-
-  /* ---------- MATERIALS ---------- */
-  function makeMaterial(){
-    return new THREE.MeshStandardMaterial({color:0xe8ff47, roughness:0.35, metalness:0.1});
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
   }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+/* ---------- SCENE SETUP ---------- */
+const canvas = document.getElementById('canvas3d');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, preserveDrawingBuffer:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x080808);
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 200);
+camera.position.set(6, 5, 8);
+
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.target.set(0, 0.5, 0);
+
+/* ---------- LIGHTS ---------- */
+scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+dirLight.position.set(5, 10, 7);
+scene.add(dirLight);
+const fillLight = new THREE.DirectionalLight(0xffffff, 0.3);
+fillLight.position.set(-5, 3, -5);
+scene.add(fillLight);
+
+/* ---------- GRID ---------- */
+const grid = new THREE.GridHelper(20, 40, 0x222222, 0x151515);
+scene.add(grid);
+
+/* ---------- STATE ---------- */
+const objects = [];
+let selected = null;
+let isDragging = false;
+const dragPlane = new THREE.Plane(new THREE.Vector3(0,1,0), 0);
+const dragOffset = new THREE.Vector3();
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+const intersection = new THREE.Vector3();
+
+/* ---------- MATERIALS ---------- */
+function makeMaterial(){
+  return new THREE.MeshStandardMaterial({color:0xe8ff47, roughness:0.35, metalness:0.1});
+}
+
+/* ---------- ADD SHAPE ---------- */
+function addShape(type){
+  let geo;
+  switch(type){
+    case 'cube':     geo = new THREE.BoxGeometry(1,1,1); break;
+    case 'sphere':   geo = new THREE.SphereGeometry(0.6, 32, 24); break;
+    case 'cylinder': geo = new THREE.CylinderGeometry(0.5, 0.5, 1.2, 32); break;
+    case 'cone':     geo = new THREE.ConeGeometry(0.6, 1.2, 32); break;
+    default: return;
+  }
+  const mesh = new THREE.Mesh(geo, makeMaterial());
+
+  const yOffset = type === 'cube' ? 0.5 : 0.6;
+  mesh.position.set(
+    (Math.random()-0.5)*4,
+    yOffset,
+    (Math.random()-0.5)*4
+  );
+  mesh.userData.shapeType = type;
+
+  scene.add(mesh);
+  objects.push(mesh);
+  selectObject(mesh);
+}
+
+/* ---------- SELECTION ---------- */
+function selectObject(obj){
+  deselectObject();
+  if(!obj) return;
+  selected = obj;
   const outlineMat = new THREE.MeshBasicMaterial({color:0xe8ff47, wireframe:true, transparent:true, opacity:0.5});
+  const wire = new THREE.Mesh(obj.geometry.clone(), outlineMat);
+  wire.scale.setScalar(1.05);
+  wire.raycast = function(){};
+  obj.add(wire);
+  obj.userData.outline = wire;
+}
 
-  /* ---------- ADD SHAPE ---------- */
-  function addShape(type){
-    let geo;
-    switch(type){
-      case 'cube':     geo = new THREE.BoxGeometry(1,1,1); break;
-      case 'sphere':   geo = new THREE.SphereGeometry(0.6, 32, 24); break;
-      case 'cylinder': geo = new THREE.CylinderGeometry(0.5, 0.5, 1.2, 32); break;
-      case 'cone':     geo = new THREE.ConeGeometry(0.6, 1.2, 32); break;
-      default: return;
-    }
-    const mesh = new THREE.Mesh(geo, makeMaterial());
-
-    // random spawn around origin
-    mesh.position.set(
-      (Math.random()-0.5)*4,
-      geo.type === 'SphereGeometry' ? 0.6 : (type==='cone'?0.6:type==='cylinder'?0.6:0.5),
-      (Math.random()-0.5)*4
-    );
-    mesh.userData.shapeType = type;
-
-    scene.add(mesh);
-    objects.push(mesh);
-    selectObject(mesh);
+function deselectObject(){
+  if(selected && selected.userData.outline){
+    selected.remove(selected.userData.outline);
+    selected.userData.outline.geometry.dispose();
+    selected.userData.outline.material.dispose();
+    delete selected.userData.outline;
   }
+  selected = null;
+}
 
-  /* ---------- SELECTION ---------- */
-  function selectObject(obj){
-    deselectObject();
-    if(!obj) return;
-    selected = obj;
-    // add wireframe outline
-    const wire = new THREE.Mesh(obj.geometry.clone(), outlineMat.clone());
-    wire.scale.setScalar(1.05);
-    wire.raycast = function(){};  // ignore raycasts on outline
-    obj.add(wire);
-    obj.userData.outline = wire;
-  }
+/* ---------- DELETE ---------- */
+function deleteSelectedObject(){
+  if(!selected) return;
+  const obj = selected;
+  deselectObject();
+  scene.remove(obj);
+  const i = objects.indexOf(obj);
+  if(i > -1) objects.splice(i, 1);
+  obj.geometry.dispose();
+  obj.material.dispose();
+}
 
-  function deselectObject(){
-    if(selected && selected.userData.outline){
-      selected.remove(selected.userData.outline);
-      selected.userData.outline.geometry.dispose();
-      selected.userData.outline.material.dispose();
-      delete selected.userData.outline;
-    }
-    selected = null;
-  }
-
-  /* ---------- DELETE ---------- */
-  function deleteSelected(){
-    if(!selected) return;
-    deselectObject();
-    const obj = selected || objects[objects.length-1];
-    // re-select was cleared, use the one we had
-    // Actually, deselectObject clears selected, so we need to capture it first
-  }
-
-  // fix delete — capture ref before deselect
-  function deleteObject(obj){
-    if(!obj) return;
-    if(obj === selected) deselectObject();
+function clearAll(){
+  deselectObject();
+  while(objects.length){
+    const obj = objects.pop();
     scene.remove(obj);
-    const i = objects.indexOf(obj);
-    if(i > -1) objects.splice(i, 1);
     obj.geometry.dispose();
     obj.material.dispose();
   }
+}
 
-  function deleteSelectedObject(){
-    if(!selected) return;
-    const obj = selected;
+/* ---------- SCREENSHOT ---------- */
+function screenshot(){
+  renderer.render(scene, camera);
+  const link = document.createElement('a');
+  link.download = 'cre8pr-playground.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+/* ---------- POINTER EVENTS ---------- */
+function getCanvasMouse(e){
+  const rect = canvas.getBoundingClientRect();
+  mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+}
+
+canvas.addEventListener('pointerdown', function(e){
+  if(e.button !== 0) return;
+  getCanvasMouse(e);
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObjects(objects, false);
+  if(hits.length > 0){
+    const obj = hits[0].object;
+    selectObject(obj);
+    isDragging = true;
+    controls.enabled = false;
+
+    dragPlane.set(new THREE.Vector3(0,1,0), -obj.position.y);
+    raycaster.ray.intersectPlane(dragPlane, intersection);
+    dragOffset.copy(obj.position).sub(intersection);
+
+    canvas.setPointerCapture(e.pointerId);
+  } else {
     deselectObject();
-    scene.remove(obj);
-    const i = objects.indexOf(obj);
-    if(i > -1) objects.splice(i, 1);
-    obj.geometry.dispose();
-    obj.material.dispose();
   }
+});
 
-  function clearAll(){
-    deselectObject();
-    while(objects.length){
-      const obj = objects.pop();
-      scene.remove(obj);
-      obj.geometry.dispose();
-      obj.material.dispose();
-    }
+canvas.addEventListener('pointermove', function(e){
+  if(!isDragging || !selected) return;
+  getCanvasMouse(e);
+  raycaster.setFromCamera(mouse, camera);
+  if(raycaster.ray.intersectPlane(dragPlane, intersection)){
+    selected.position.x = intersection.x + dragOffset.x;
+    selected.position.z = intersection.z + dragOffset.z;
   }
+});
 
-  /* ---------- SCREENSHOT ---------- */
-  function screenshot(){
-    renderer.render(scene, camera);
-    const link = document.createElement('a');
-    link.download = 'cre8pr-playground.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
+canvas.addEventListener('pointerup', function(){
+  if(isDragging){
+    isDragging = false;
+    controls.enabled = true;
   }
+});
 
-  /* ---------- POINTER EVENTS ---------- */
-  function getCanvasMouse(e){
-    const rect = canvas.getBoundingClientRect();
-    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+/* ---------- KEYBOARD ---------- */
+document.addEventListener('keydown', function(e){
+  if(!selected) return;
+  switch(e.key){
+    case 'r': case 'R':
+      selected.rotation.y += Math.PI / 8;
+      break;
+    case '+': case '=':
+      selected.scale.multiplyScalar(1.1);
+      break;
+    case '-': case '_':
+      selected.scale.multiplyScalar(0.9);
+      break;
+    case 'Delete': case 'Backspace':
+      deleteSelectedObject();
+      break;
   }
+});
 
-  canvas.addEventListener('pointerdown', function(e){
-    if(e.button !== 0) return;
-    getCanvasMouse(e);
-    raycaster.setFromCamera(mouse, camera);
-    const hits = raycaster.intersectObjects(objects, false);
-    if(hits.length > 0){
-      const obj = hits[0].object;
-      selectObject(obj);
-      isDragging = true;
-      controls.enabled = false;
-
-      // compute drag offset so object doesn't jump
-      dragPlane.set(new THREE.Vector3(0,1,0), -obj.position.y);
-      raycaster.ray.intersectPlane(dragPlane, intersection);
-      dragOffset.copy(obj.position).sub(intersection);
-
-      canvas.setPointerCapture(e.pointerId);
-    } else {
-      deselectObject();
-    }
+/* ---------- TOOLBAR BUTTONS ---------- */
+document.querySelectorAll('[data-shape]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    addShape(this.dataset.shape);
   });
+});
+document.getElementById('btnDelete').addEventListener('click', deleteSelectedObject);
+document.getElementById('btnClear').addEventListener('click', clearAll);
+document.getElementById('btnScreenshot').addEventListener('click', screenshot);
 
-  canvas.addEventListener('pointermove', function(e){
-    if(!isDragging || !selected) return;
-    getCanvasMouse(e);
-    raycaster.setFromCamera(mouse, camera);
-    if(raycaster.ray.intersectPlane(dragPlane, intersection)){
-      selected.position.x = intersection.x + dragOffset.x;
-      selected.position.z = intersection.z + dragOffset.z;
-    }
-  });
-
-  canvas.addEventListener('pointerup', function(e){
-    if(isDragging){
-      isDragging = false;
-      controls.enabled = true;
-    }
-  });
-
-  /* ---------- KEYBOARD ---------- */
-  document.addEventListener('keydown', function(e){
-    if(!selected) return;
-    switch(e.key){
-      case 'r': case 'R':
-        selected.rotation.y += Math.PI / 8;
-        break;
-      case '+': case '=':
-        selected.scale.multiplyScalar(1.1);
-        break;
-      case '-': case '_':
-        selected.scale.multiplyScalar(0.9);
-        break;
-      case 'Delete': case 'Backspace':
-        deleteSelectedObject();
-        break;
-    }
-  });
-
-  /* ---------- TOOLBAR BUTTONS ---------- */
-  document.querySelectorAll('[data-shape]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      addShape(this.dataset.shape);
-    });
-  });
-  document.getElementById('btnDelete').addEventListener('click', deleteSelectedObject);
-  document.getElementById('btnClear').addEventListener('click', clearAll);
-  document.getElementById('btnScreenshot').addEventListener('click', screenshot);
-
-  /* ---------- RESIZE ---------- */
-  function resize(){
-    const w = canvas.clientWidth, h = canvas.clientHeight;
-    if(canvas.width !== w || canvas.height !== h){
-      renderer.setSize(w, h, false);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-    }
+/* ---------- RESIZE ---------- */
+function resize(){
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  if(canvas.width !== w || canvas.height !== h){
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
   }
-  window.addEventListener('resize', resize);
+}
+window.addEventListener('resize', resize);
 
-  /* ---------- RENDER LOOP ---------- */
-  function animate(){
-    requestAnimationFrame(animate);
-    resize();
-    controls.update();
-    renderer.render(scene, camera);
-  }
-  animate();
-})();
+/* ---------- RENDER LOOP ---------- */
+function animate(){
+  requestAnimationFrame(animate);
+  resize();
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
 </script>
 </body>
 </html>
