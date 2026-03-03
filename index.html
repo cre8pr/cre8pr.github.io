@@ -5,72 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>CRE8 PR — Design & Prototyping Studio</title>
 <meta name="description" content="CRE8 PR is an engineering design and prototyping studio turning ideas into real, manufacturable objects through CAD and rapid iteration."/>
+<meta property="og:title" content="CRE8 PR — Design & Prototyping Studio"/>
+<meta property="og:description" content="Engineering design and prototyping studio in Puerto Rico. From idea to real, manufacturable object."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://cre8pr.github.io/"/>
+<meta property="og:image" content="https://cre8pr.github.io/logo.png"/>
+<meta name="twitter:card" content="summary"/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="logo.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 <style>
-:root{
-  --bg:#080808;
-  --surface:rgba(255,255,255,0.03);
-  --surface2:rgba(255,255,255,0.06);
-  --text:#f0ede8;
-  --muted:rgba(240,237,232,0.5);
-  --accent:#e8ff47;
-  --border:rgba(255,255,255,0.08);
-  --border2:rgba(255,255,255,0.14);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:'DM Sans',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
-  cursor:none;
-}
-.cursor{
-  position:fixed;width:10px;height:10px;
-  background:var(--accent);border-radius:50%;
-  pointer-events:none;z-index:9999;
-  transition:transform 0.1s ease;
-  mix-blend-mode:difference;
-}
-.cursor-ring{
-  position:fixed;width:36px;height:36px;
-  border:1px solid var(--accent);border-radius:50%;
-  pointer-events:none;z-index:9998;
-  transition:all 0.18s ease;opacity:0.5;
-}
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:20px 48px;
-  background:rgba(8,8,8,0.85);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  transition:padding 0.3s ease;
-}
-nav.scrolled{padding:14px 48px;}
-.nav-brand{
-  display:flex;align-items:center;gap:12px;
-  font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;
-  color:var(--text);text-decoration:none;
-}
-.logo-box{
-  width:36px;height:36px;background:var(--accent);
-  border-radius:8px;display:grid;place-items:center;overflow:hidden;
-}
-.logo-box img{width:100%;height:100%;object-fit:cover;display:block;}
-.logo-fallback{font-family:'Bebas Neue',sans-serif;font-size:14px;color:#080808;letter-spacing:1px;}
-.nav-links{display:flex;gap:4px;align-items:center;}
-.nav-link{
-  font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);
-  text-decoration:none;padding:8px 16px;border-radius:4px;
-  transition:all 0.2s;letter-spacing:0.5px;
-}
-.nav-link:hover,.nav-link.active{color:var(--text);background:var(--surface2);}
-.nav-cta{background:var(--accent);color:#080808 !important;font-weight:600;border-radius:4px;}
-.nav-cta:hover{background:#d4eb3a;transform:translateY(-1px);}
-
 /* HERO */
 .hero{
   min-height:100vh;
@@ -85,7 +31,6 @@ nav.scrolled{padding:14px 48px;}
   background-size:60px 60px;
   animation:gridShift 25s linear infinite;
 }
-@keyframes gridShift{0%{background-position:0 0,0 0;}100%{background-position:60px 60px,60px 60px;}}
 .hero-orb{
   position:absolute;top:-200px;right:-100px;
   width:700px;height:700px;
@@ -98,7 +43,6 @@ nav.scrolled{padding:14px 48px;}
   background:radial-gradient(circle,rgba(255,107,53,0.05) 0%,transparent 70%);
   border-radius:50%;animation:orbPulse 8s ease-in-out infinite reverse;
 }
-@keyframes orbPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
 .hero-eyebrow{
   font-family:'DM Mono',monospace;font-size:12px;
   letter-spacing:3px;color:var(--accent);text-transform:uppercase;
@@ -119,18 +63,6 @@ nav.scrolled{padding:14px 48px;}
 .hero-desc{max-width:480px;font-size:16px;line-height:1.7;color:var(--muted);font-weight:300;}
 .hero-desc strong{color:var(--text);font-weight:500;}
 .hero-actions{display:flex;gap:12px;flex-shrink:0;}
-.btn-primary{
-  background:var(--accent);color:#080808;font-weight:700;font-size:14px;
-  padding:14px 28px;border-radius:4px;text-decoration:none;letter-spacing:0.5px;
-  transition:all 0.2s;display:inline-block;
-}
-.btn-primary:hover{background:#d4eb3a;transform:translateY(-2px);box-shadow:0 8px 30px rgba(232,255,71,0.3);}
-.btn-ghost{
-  border:1px solid var(--border2);color:var(--text);font-weight:500;font-size:14px;
-  padding:14px 28px;border-radius:4px;text-decoration:none;letter-spacing:0.5px;
-  transition:all 0.2s;display:inline-block;
-}
-.btn-ghost:hover{border-color:var(--text);background:var(--surface2);}
 
 /* MARQUEE */
 .marquee-wrap{
@@ -144,14 +76,7 @@ nav.scrolled{padding:14px 48px;}
   padding:0 40px;display:flex;align-items:center;gap:40px;flex-shrink:0;
 }
 .dot{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0;}
-@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}
-}
-
-/* SECTIONS */
-.section{padding:100px 48px;position:relative;z-index:2;}
-.section-divider{display:flex;align-items:center;gap:16px;margin-bottom:60px;}
-.section-divider h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);line-height:1;flex-shrink:0;}
-.section-divider-line{height:1px;background:var(--border);flex:1;}
+@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
 /* PROCESS */
 .process-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;border:1px solid var(--border);}
@@ -195,6 +120,27 @@ nav.scrolled{padding:14px 48px;}
 .service-card h3{font-size:18px;font-weight:600;margin-bottom:10px;}
 .service-card p{color:var(--muted);font-size:14px;line-height:1.7;}
 
+/* PORTFOLIO */
+.portfolio-intro{color:var(--muted);font-size:16px;line-height:1.8;max-width:64ch;margin-bottom:48px;}
+.portfolio-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;}
+.portfolio-step{
+  position:relative;overflow:hidden;border:1px solid var(--border);
+  background:var(--surface);transition:all 0.4s;
+}
+.portfolio-step:hover{border-color:var(--accent);z-index:2;transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.6);}
+.portfolio-step img{
+  width:100%;aspect-ratio:4/3;object-fit:cover;display:block;
+  filter:grayscale(0.3);transition:filter 0.4s;
+}
+.portfolio-step:hover img{filter:grayscale(0);}
+.portfolio-step-info{padding:20px;}
+.portfolio-step-num{
+  font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);
+  letter-spacing:2px;margin-bottom:8px;display:block;
+}
+.portfolio-step-info h3{font-size:15px;font-weight:600;margin-bottom:6px;}
+.portfolio-step-info p{color:var(--muted);font-size:13px;line-height:1.6;}
+
 /* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
 .stat{background:var(--bg);padding:48px;text-align:center;transition:background 0.2s;}
@@ -202,54 +148,19 @@ nav.scrolled{padding:14px 48px;}
 .stat-num{font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:1;color:var(--accent);display:block;}
 .stat-label{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;color:var(--muted);margin-top:8px;}
 
-/* CTA */
-.cta-section{
-  margin:0 48px 100px;background:var(--accent);border-radius:8px;
-  padding:80px;display:flex;align-items:center;justify-content:space-between;
-  gap:40px;position:relative;overflow:hidden;
-}
-.cta-section::before{
-  content:'CRE8';position:absolute;right:-20px;bottom:-40px;
-  font-family:'Bebas Neue',sans-serif;font-size:200px;color:rgba(0,0,0,0.06);
-  line-height:1;pointer-events:none;
-}
-.cta-section h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);color:#080808;line-height:1;}
-.cta-section p{color:rgba(8,8,8,0.6);font-size:16px;margin-top:12px;max-width:40ch;line-height:1.6;}
-.btn-dark{
-  background:#080808;color:var(--accent);font-weight:700;font-size:14px;
-  padding:16px 32px;border-radius:4px;text-decoration:none;letter-spacing:0.5px;
-  transition:all 0.2s;flex-shrink:0;display:inline-block;
-}
-.btn-dark:hover{background:#1a1a1a;transform:translateY(-2px);}
-
-footer{
-  border-top:1px solid var(--border);padding:32px 48px;
-  display:flex;align-items:center;justify-content:space-between;
-  font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:0.5px;
-}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s cubic-bezier(.2,.8,.2,1);}
-.reveal.visible{opacity:1;transform:translateY(0);}
-.reveal-delay-1{transition-delay:0.1s;}
-.reveal-delay-2{transition-delay:0.2s;}
-.reveal-delay-3{transition-delay:0.3s;}
-
 @media(max-width:900px){
-  nav{padding:16px 24px;}
   .hero{padding:0 24px 60px;}
   .hero-bottom{flex-direction:column;align-items:flex-start;}
-  .section{padding:60px 24px;}
   .process-grid{grid-template-columns:1fr;}
   .services-grid{grid-template-columns:1fr 1fr;}
+  .portfolio-steps{grid-template-columns:repeat(3,1fr);}
   .stats-row{grid-template-columns:1fr;}
-  .cta-section{margin:0 24px 60px;padding:48px 32px;flex-direction:column;align-items:flex-start;}
-  footer{flex-direction:column;gap:12px;text-align:center;padding:24px;}
+  .cta-section{margin:0;}
 }
 @media(max-width:600px){
   .services-grid{grid-template-columns:1fr;}
+  .portfolio-steps{grid-template-columns:1fr 1fr;}
   .hero-title{font-size:64px;}
-  .nav-links .nav-link:not(.nav-cta){display:none;}
 }
 </style>
 </head>
@@ -336,6 +247,57 @@ footer{
   </div>
 </section>
 
+<!-- PORTFOLIO / CASE STUDY -->
+<section class="section" style="padding-top:0">
+  <div class="section-divider reveal">
+    <h2>From Sketch to Reality</h2>
+    <div class="section-divider-line"></div>
+  </div>
+  <p class="portfolio-intro reveal">Every project follows the same core journey — from an initial idea through engineering design, fabrication, and final product. Here's a real look at how a concept becomes a physical object.</p>
+  <div class="portfolio-steps">
+    <div class="portfolio-step reveal">
+      <img src="sketch.png" alt="Initial concept sketch" loading="lazy" decoding="async" width="800" height="600">
+      <div class="portfolio-step-info">
+        <span class="portfolio-step-num">01 — SKETCH</span>
+        <h3>Concept</h3>
+        <p>Rough ideas and problem definition on paper.</p>
+      </div>
+    </div>
+    <div class="portfolio-step reveal reveal-delay-1">
+      <img src="cad.png" alt="CAD engineering design" loading="lazy" decoding="async" width="800" height="600">
+      <div class="portfolio-step-info">
+        <span class="portfolio-step-num">02 — CAD</span>
+        <h3>Engineering Design</h3>
+        <p>Parametric 3D model with real tolerances.</p>
+      </div>
+    </div>
+    <div class="portfolio-step reveal reveal-delay-2">
+      <img src="bambu.png" alt="3D printing on Bambu printer" loading="lazy" decoding="async" width="800" height="600">
+      <div class="portfolio-step-info">
+        <span class="portfolio-step-num">03 — PRINT</span>
+        <h3>Fabrication</h3>
+        <p>Rapid prototyping via 3D printing.</p>
+      </div>
+    </div>
+    <div class="portfolio-step reveal reveal-delay-3">
+      <img src="3dprint.png" alt="3D printed prototype" loading="lazy" decoding="async" width="800" height="600">
+      <div class="portfolio-step-info">
+        <span class="portfolio-step-num">04 — PROTOTYPE</span>
+        <h3>First Build</h3>
+        <p>Physical prototype for testing and feedback.</p>
+      </div>
+    </div>
+    <div class="portfolio-step reveal reveal-delay-4">
+      <img src="actual.png" alt="Final manufactured product" loading="lazy" decoding="async" width="800" height="600">
+      <div class="portfolio-step-info">
+        <span class="portfolio-step-num">05 — FINAL</span>
+        <h3>Finished Product</h3>
+        <p>Validated, refined, and ready for use.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section" style="padding-top:0">
   <div class="section-divider reveal">
     <h2>Services</h2>
@@ -372,12 +334,12 @@ footer{
       <div class="stat-label">Days avg. first prototype</div>
     </div>
     <div class="stat reveal reveal-delay-1">
-      <span class="stat-num" data-target="100">0</span>
-      <div class="stat-label">% Puerto Rico focused</div>
+      <span class="stat-num" data-target="5">0</span>
+      <div class="stat-label">Step process · sketch to product</div>
     </div>
     <div class="stat reveal reveal-delay-2">
-      <span class="stat-num" data-target="4">0</span>
-      <div class="stat-label">Step process · no fluff</div>
+      <span class="stat-num" data-target="100">0</span>
+      <div class="stat-label">% locally built in Puerto Rico</div>
     </div>
   </div>
 </section>
@@ -394,56 +356,13 @@ footer{
 
 <footer>
   <span>© <span id="year"></span> CRE8 PR · Puerto Rico</span>
-  <span>Design · Prototype · Build</span>
+  <div class="footer-links">
+    <a href="mailto:cre8pr2025@gmail.com">cre8pr2025@gmail.com</a>
+    <span style="color:var(--border2)">·</span>
+    <span>Design · Prototype · Build</span>
+  </div>
 </footer>
 
-<script>
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// Custom cursor
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX; my=e.clientY;
-  cursor.style.left=(mx-5)+'px';
-  cursor.style.top=(my-5)+'px';
-});
-(function animRing(){
-  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
-  ring.style.left=(rx-18)+'px'; ring.style.top=(ry-18)+'px';
-  requestAnimationFrame(animRing);
-})();
-document.querySelectorAll('a,button,.service-card,.process-item').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ cursor.style.transform='scale(2.5)'; ring.style.transform='scale(1.5)'; ring.style.opacity='0.8'; });
-  el.addEventListener('mouseleave',()=>{ cursor.style.transform='scale(1)'; ring.style.transform='scale(1)'; ring.style.opacity='0.5'; });
-});
-
-// Nav scroll
-window.addEventListener('scroll',()=>{ document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60); });
-
-// Reveal + counter
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('visible');
-      const num = e.target.querySelector('[data-target]');
-      if(num && !num.dataset.animated){
-        num.dataset.animated=true;
-        const target=parseInt(num.dataset.target);
-        let count=0;
-        const step=Math.max(1,Math.ceil(target/40));
-        const suffix = target===100?'%':'+';
-        const t=setInterval(()=>{
-          count=Math.min(count+step,target);
-          num.textContent=count+suffix;
-          if(count>=target) clearInterval(t);
-        },30);
-      }
-    }
-  });
-},{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-</script>
+<script src="shared.js"></script>
 </body>
 </html>
