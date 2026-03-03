@@ -128,8 +128,8 @@
 }
 .portfolio-step:hover{border-color:var(--accent);z-index:2;transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.6);}
 .portfolio-step img{
-  width:100%;display:block;object-fit:contain;background:rgba(0,0,0,0.3);
-  filter:grayscale(0.3);transition:filter 0.4s;
+  width:100%;aspect-ratio:1/1;display:block;object-fit:cover;object-position:center;
+  background:rgba(0,0,0,0.3);filter:grayscale(0.3);transition:filter 0.4s;
 }
 .portfolio-step:hover img{filter:grayscale(0);}
 .portfolio-step-info{padding:16px 14px;}
