@@ -121,24 +121,24 @@
 
 /* PORTFOLIO */
 .portfolio-intro{color:var(--muted);font-size:16px;line-height:1.8;max-width:64ch;margin-bottom:48px;}
-.portfolio-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;}
+.portfolio-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
 .portfolio-step{
   position:relative;overflow:hidden;border:1px solid var(--border);
-  background:var(--surface);transition:all 0.4s;
+  border-radius:6px;background:var(--surface);transition:all 0.4s;
 }
 .portfolio-step:hover{border-color:var(--accent);z-index:2;transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.6);}
 .portfolio-step img{
-  width:100%;aspect-ratio:4/3;object-fit:cover;display:block;
+  width:100%;display:block;object-fit:contain;background:rgba(0,0,0,0.3);
   filter:grayscale(0.3);transition:filter 0.4s;
 }
 .portfolio-step:hover img{filter:grayscale(0);}
-.portfolio-step-info{padding:20px;}
+.portfolio-step-info{padding:16px 14px;}
 .portfolio-step-num{
-  font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);
-  letter-spacing:2px;margin-bottom:8px;display:block;
+  font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);
+  letter-spacing:2px;margin-bottom:6px;display:block;
 }
-.portfolio-step-info h3{font-size:15px;font-weight:600;margin-bottom:6px;}
-.portfolio-step-info p{color:var(--muted);font-size:13px;line-height:1.6;}
+.portfolio-step-info h3{font-size:14px;font-weight:600;margin-bottom:4px;}
+.portfolio-step-info p{color:var(--muted);font-size:12px;line-height:1.5;}
 
 /* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
@@ -152,13 +152,13 @@
   .hero-bottom{flex-direction:column;align-items:flex-start;}
   .process-grid{grid-template-columns:1fr;}
   .services-grid{grid-template-columns:1fr 1fr;}
-  .portfolio-steps{grid-template-columns:repeat(3,1fr);}
+  .portfolio-steps{grid-template-columns:repeat(3,1fr);gap:12px;}
   .stats-row{grid-template-columns:1fr;}
   .cta-section{margin:0;}
 }
 @media(max-width:600px){
   .services-grid{grid-template-columns:1fr;}
-  .portfolio-steps{grid-template-columns:1fr 1fr;}
+  .portfolio-steps{grid-template-columns:1fr 1fr;gap:10px;}
   .hero-title{font-size:64px;}
 }
 </style>
@@ -255,7 +255,7 @@
   <p class="portfolio-intro reveal">Every project follows the same core journey — from an initial idea through engineering design, fabrication, and final product. Here's a real look at how a concept becomes a physical object.</p>
   <div class="portfolio-steps">
     <div class="portfolio-step reveal">
-      <img src="sketch.png" alt="Initial concept sketch" loading="lazy" decoding="async" width="800" height="600">
+      <img src="sketch.png" alt="Initial concept sketch" loading="lazy" decoding="async">
       <div class="portfolio-step-info">
         <span class="portfolio-step-num">01 — SKETCH</span>
         <h3>Concept</h3>
@@ -263,7 +263,7 @@
       </div>
     </div>
     <div class="portfolio-step reveal reveal-delay-1">
-      <img src="cad.png" alt="CAD engineering design" loading="lazy" decoding="async" width="800" height="600">
+      <img src="cad.png" alt="CAD engineering design" loading="lazy" decoding="async">
       <div class="portfolio-step-info">
         <span class="portfolio-step-num">02 — CAD</span>
         <h3>Engineering Design</h3>
@@ -271,7 +271,7 @@
       </div>
     </div>
     <div class="portfolio-step reveal reveal-delay-2">
-      <img src="bambu.png" alt="3D printing on Bambu printer" loading="lazy" decoding="async" width="800" height="600">
+      <img src="bambu.png" alt="3D printing on Bambu printer" loading="lazy" decoding="async">
       <div class="portfolio-step-info">
         <span class="portfolio-step-num">03 — PRINT</span>
         <h3>Fabrication</h3>
@@ -279,7 +279,7 @@
       </div>
     </div>
     <div class="portfolio-step reveal reveal-delay-3">
-      <img src="3dprint.png" alt="3D printed prototype" loading="lazy" decoding="async" width="800" height="600">
+      <img src="3dprint.png" alt="3D printed prototype" loading="lazy" decoding="async">
       <div class="portfolio-step-info">
         <span class="portfolio-step-num">04 — PROTOTYPE</span>
         <h3>First Build</h3>
@@ -287,7 +287,7 @@
       </div>
     </div>
     <div class="portfolio-step reveal reveal-delay-4">
-      <img src="actual.png" alt="Final manufactured product" loading="lazy" decoding="async" width="800" height="600">
+      <img src="actual.png" alt="Final manufactured product" loading="lazy" decoding="async">
       <div class="portfolio-step-info">
         <span class="portfolio-step-num">05 — FINAL</span>
         <h3>Finished Product</h3>
